@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "dashboards": [
+    {
+      "widgets": [
+        {
+          "unique_key": "243bdf3c-6ed5-46a2-929c-748eb1233b18",
+          "location": {
+            "x": 0,
+            "y": 0,
+            "cols": 12,
+            "rows": 5
+          },
+          "reference": false
+        }
+      ],
+      "parent": null,
+      "feature": null,
+      "unique_key": "a1fa0df4-98b9-40a1-ab57-6eb094e9ec76",
+      "name": "Servers Summary - API Poller Status",
+      "private": null
+    }
+  ],
+  "widgets": [
+    {
+      "type": "table",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "API Pollers",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": true,
+            "collapsed": true
+          }
+        },
+        "table": {
+          "providers": {
+            "dataSource": {
+              "providerId": "TableSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT A.Name as [Application Name] ,A.DetailsUrl as [ADetailsUrl], A.Status as ApplicationStatus, A.Template.Name as Template, A.Node.Caption as [Node Name], A.Node.MachineType as [Machine Type], A.Node.VendorIcon as [Vendor Icon], A.Node.Status as [Node Status], A.Node.DetailsURL as [NDetailsUrl]\nFROM Orion.APIPoller.ApiPoller A\nWhere 1=1",
+                "dataFields": [
+                  {
+                    "id": "Application Name",
+                    "label": "Application Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "ADetailsUrl",
+                    "label": "ADetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "ApplicationStatus",
+                    "label": "ApplicationStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Template",
+                    "label": "Template",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Node Name",
+                    "label": "Node Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Machine Type",
+                    "label": "Machine Type",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Vendor Icon",
+                    "label": "Vendor Icon",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Node Status",
+                    "label": "Node Status",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "NDetailsUrl",
+                    "label": "NDetailsUrl",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "properties": {
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT A.Name as [Application Name] ,A.DetailsUrl as [ADetailsUrl], A.Status as ApplicationStatus, A.Template.Name as Template, A.Node.Caption as [Node Name], A.Node.MachineType as [Machine Type], A.Node.VendorIcon as [Vendor Icon], A.Node.Status as [Node Status], A.Node.DetailsURL as [NDetailsUrl]\nFROM Orion.APIPoller.ApiPoller A\nWhere 1=1",
+                    "dataFields": [
+                      {
+                        "id": "Application Name",
+                        "label": "Application Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "ADetailsUrl",
+                        "label": "ADetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "ApplicationStatus",
+                        "label": "ApplicationStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Template",
+                        "label": "Template",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Node Name",
+                        "label": "Node Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Machine Type",
+                        "label": "Machine Type",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Vendor Icon",
+                        "label": "Vendor Icon",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Node Status",
+                        "label": "Node Status",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "NDetailsUrl",
+                        "label": "NDetailsUrl",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "columns": [
+                {
+                  "id": "column_e1ae214f-a8ae-47f8-8890-a95a01a4e7d6",
+                  "label": "API Poller Status",
+                  "isActive": true,
+                  "formatter": {
+                    "componentType": "StatusFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "ApplicationStatus"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "column_fd259bf8-9324-4a60-9906-2afc9bc56d63",
+                  "label": "API Poller Name",
+                  "isActive": true,
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "ApplicationStatus",
+                        "vendor": null,
+                        "link": "ADetailsUrl",
+                        "value": "Application Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "api"
+                    }
+                  }
+                },
+                {
+                  "id": "column_88d99682-d597-4b90-bbda-75cb9a331a57",
+                  "label": "Template",
+                  "isActive": true,
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Template"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "column_a03426d7-b97d-4acb-8393-1a14e3517e01",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "Node Status",
+                        "vendor": null,
+                        "link": "NDetailsUrl",
+                        "value": "Node Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "network-device"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Node Name"
+                },
+                {
+                  "id": "column_fee78831-44a6-48ac-a0f2-58b8e8a05ef6",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": null,
+                        "vendor": "Vendor Icon",
+                        "link": "NDetailsUrl",
+                        "value": "Machine Type"
+                      },
+                      "iconFormat": "vendor",
+                      "entityIcon": null
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Machine Type"
+                }
+              ],
+              "sorterConfiguration": {
+                "descendantSorting": ""
+              },
+              "hasVirtualScroll": true,
+              "searchConfiguration": {
+                "enabled": true
+              }
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "243bdf3c-6ed5-46a2-929c-748eb1233b18",
+      "name": "API Pollers",
+      "private": false
+    }
+  ],
+  "remove": null
+}

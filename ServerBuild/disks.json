@@ -1,0 +1,100 @@
+[
+    {
+        "ServerType": "Primary Polling Engine",
+        "DiskNumber": "0",
+        "BaseSizeGB": "40",
+        "DriveLetter": "C",
+        "Label": "System"
+    },
+    {
+        "ServerType": "Primary Polling Engine",
+        "DiskNumber": "1",
+        "BaseSizeGB": "26",
+        "DriveLetter": "D",
+        "Label": "Page File"
+    },
+    {
+        "ServerType": "Primary Polling Engine",
+        "DiskNumber": "2",
+        "BaseSizeGB": "40",
+        "DriveLetter": "E",
+        "Label": "Programs"
+    },
+    {
+        "ServerType": "Primary Polling Engine",
+        "DiskNumber": "3",
+        "BaseSizeGB": "10",
+        "DriveLetter": "F",
+        "Label": "Web"
+    },
+    {
+        "ServerType": "Primary Polling Engine",
+        "DiskNumber": "4",
+        "BaseSizeGB": "10",
+        "DriveLetter": "G",
+        "Label": "Logs"
+    },
+    {
+        "ServerType": "Additional Polling Engine",
+        "DiskNumber": "0",
+        "BaseSizeGB": "40",
+        "DriveLetter": "C",
+        "Label": "System"
+    },
+    {
+        "ServerType": "Additional Polling Engine",
+        "DiskNumber": "1",
+        "BaseSizeGB": "26",
+        "DriveLetter": "D",
+        "Label": "Page File"
+    },
+    {
+        "ServerType": "Additional Polling Engine",
+        "DiskNumber": "2",
+        "BaseSizeGB": "40",
+        "DriveLetter": "E",
+        "Label": "Programs"
+    },
+    {
+        "ServerType": "Additional Polling Engine",
+        "DiskNumber": "3",
+        "BaseSizeGB": "10",
+        "DriveLetter": "G",
+        "Label": "Logs"
+    },
+    {
+        "ServerType": "Additional Web Site",
+        "DiskNumber": "0",
+        "BaseSizeGB": "40",
+        "DriveLetter": "C",
+        "Label": "System"
+    },
+    {
+        "ServerType": "Additional Web Site",
+        "DiskNumber": "1",
+        "BaseSizeGB": "26",
+        "DriveLetter": "D",
+        "Label": "Page File"
+    },
+    {
+        "ServerType": "Additional Web Site",
+        "DiskNumber": "2",
+        "BaseSizeGB": "40",
+        "DriveLetter": "E",
+        "Label": "Programs"
+    },
+    {
+        "ServerType": "Additional Web Site",
+        "DiskNumber": "3",
+        "BaseSizeGB": "10",
+        "DriveLetter": "F",
+        "Label": "Web"
+    },
+    {
+        "ServerType": "Additional Web Site",
+        "DiskNumber": "4",
+        "BaseSizeGB": "10",
+        "DriveLetter": "G",
+        "Label": "Logs"
+    }
+]

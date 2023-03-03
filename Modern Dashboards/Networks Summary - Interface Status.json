@@ -1,0 +1,257 @@
+{
+  "version": 1,
+  "dashboards": [
+    {
+      "widgets": [
+        {
+          "unique_key": "a7649830-eca2-46cc-b503-927e560252a6",
+          "location": {
+            "x": 0,
+            "y": 0,
+            "cols": 12,
+            "rows": 5
+          },
+          "reference": false
+        }
+      ],
+      "parent": null,
+      "feature": null,
+      "unique_key": "3faf1f86-4948-4180-80a7-8f0151c21db5",
+      "name": "Networks Summary - Interface Status",
+      "private": null
+    }
+  ],
+  "widgets": [
+    {
+      "type": "table",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "Interfaces",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": true,
+            "collapsed": true
+          }
+        },
+        "table": {
+          "providers": {
+            "dataSource": {
+              "providerId": "TableSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT ISNULL(I.Caption, '-') as [Interface Name] ,I.DetailsUrl as [IDetailsUrl], I.Status as InterfaceStatus, I.InterfaceTypeDescription as Type, I.Node.Caption as [Node Name], I.Node.MachineType as [Machine Type], I.Node.VendorIcon as [Vendor Icon], I.Node.Status as [Node Status], I.Node.DetailsURL as [NDetailsUrl]\nFrom Orion.NPM.Interfaces I\nWHERE I.Node.Category=1",
+                "dataFields": [
+                  {
+                    "id": "Interface Name",
+                    "label": "Interface Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "IDetailsUrl",
+                    "label": "IDetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "InterfaceStatus",
+                    "label": "InterfaceStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Type",
+                    "label": "Type",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Node Name",
+                    "label": "Node Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Machine Type",
+                    "label": "Machine Type",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Vendor Icon",
+                    "label": "Vendor Icon",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Node Status",
+                    "label": "Node Status",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "NDetailsUrl",
+                    "label": "NDetailsUrl",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "properties": {
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT ISNULL(I.Caption, '-') as [Interface Name] ,I.DetailsUrl as [IDetailsUrl], I.Status as InterfaceStatus, I.InterfaceTypeDescription as Type, I.Node.Caption as [Node Name], I.Node.MachineType as [Machine Type], I.Node.VendorIcon as [Vendor Icon], I.Node.Status as [Node Status], I.Node.DetailsURL as [NDetailsUrl]\nFrom Orion.NPM.Interfaces I\nWHERE I.Node.Category=1",
+                    "dataFields": [
+                      {
+                        "id": "Interface Name",
+                        "label": "Interface Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "IDetailsUrl",
+                        "label": "IDetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "InterfaceStatus",
+                        "label": "InterfaceStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Type",
+                        "label": "Type",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Node Name",
+                        "label": "Node Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Machine Type",
+                        "label": "Machine Type",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Vendor Icon",
+                        "label": "Vendor Icon",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Node Status",
+                        "label": "Node Status",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "NDetailsUrl",
+                        "label": "NDetailsUrl",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "columns": [
+                {
+                  "id": "column_9f7abcd1-80ec-40f5-9853-403aa31e5166",
+                  "label": "Interface Status",
+                  "isActive": true,
+                  "width": 150,
+                  "formatter": {
+                    "componentType": "StatusFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "InterfaceStatus"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "column_9fac83b7-6884-4fae-89ce-dac0a486c76d",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "InterfaceStatus",
+                        "vendor": null,
+                        "link": "IDetailsUrl",
+                        "value": "Interface Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "network-interface"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Interface Name"
+                },
+                {
+                  "id": "column_facac9a3-3255-43e7-bbc5-981923630544",
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Type"
+                      }
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Type"
+                },
+                {
+                  "id": "column_a03426d7-b97d-4acb-8393-1a14e3517e01",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "Node Status",
+                        "vendor": null,
+                        "link": "NDetailsUrl",
+                        "value": "Node Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "network-device"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Node Name"
+                },
+                {
+                  "id": "column_fee78831-44a6-48ac-a0f2-58b8e8a05ef6",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": null,
+                        "vendor": "Vendor Icon",
+                        "link": "NDetailsUrl",
+                        "value": "Machine Type"
+                      },
+                      "iconFormat": "vendor",
+                      "entityIcon": null
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Machine Type"
+                }
+              ],
+              "sorterConfiguration": {
+                "sortBy": "column_9fac83b7-6884-4fae-89ce-dac0a486c76d",
+                "descendantSorting": ""
+              },
+              "hasVirtualScroll": true,
+              "searchConfiguration": {
+                "enabled": true
+              }
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "a7649830-eca2-46cc-b503-927e560252a6",
+      "name": "Interfaces",
+      "private": false
+    }
+  ],
+  "remove": null
+}

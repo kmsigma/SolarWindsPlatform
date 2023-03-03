@@ -1,0 +1,3068 @@
+{
+  "version": 1,
+  "dashboards": [
+    {
+      "widgets": [
+        {
+          "unique_key": "52ad9838-b1f9-4ee9-8a06-3a74c5743d0f",
+          "location": {
+            "x": 8,
+            "y": 2,
+            "cols": 4,
+            "rows": 2
+          },
+          "reference": false
+        },
+        {
+          "unique_key": "b83a6684-cd9b-4c59-b927-5772bd81f830",
+          "location": {
+            "x": 4,
+            "y": 6,
+            "cols": 8,
+            "rows": 2
+          },
+          "reference": false
+        },
+        {
+          "unique_key": "889d6a1c-642b-49ba-b45e-55ee4bd2e6c4",
+          "location": {
+            "x": 4,
+            "y": 12,
+            "cols": 8,
+            "rows": 2
+          },
+          "reference": false
+        },
+        {
+          "unique_key": "751bb079-62d7-4cf3-827b-5e42dd393568",
+          "location": {
+            "x": 0,
+            "y": 0,
+            "cols": 6,
+            "rows": 2
+          },
+          "reference": false
+        },
+        {
+          "unique_key": "68b04a00-47e7-4d7e-ae5a-35c31852e2b5",
+          "location": {
+            "x": 6,
+            "y": 0,
+            "cols": 6,
+            "rows": 2
+          },
+          "reference": false
+        },
+        {
+          "unique_key": "8f85b333-ed7c-477e-b0bd-970f1c9eea49",
+          "location": {
+            "x": 4,
+            "y": 10,
+            "cols": 8,
+            "rows": 2
+          },
+          "reference": false
+        },
+        {
+          "unique_key": "8d73f305-73ab-4e5c-99ff-a9bac32ef37d",
+          "location": {
+            "x": 0,
+            "y": 11,
+            "cols": 4,
+            "rows": 3
+          },
+          "reference": false
+        },
+        {
+          "unique_key": "01bf6b98-89f1-47e3-88ed-588f6b0dba72",
+          "location": {
+            "x": 0,
+            "y": 2,
+            "cols": 4,
+            "rows": 6
+          },
+          "reference": false
+        },
+        {
+          "unique_key": "e66d1640-d72d-4ebe-959f-8e5e1555743e",
+          "location": {
+            "x": 4,
+            "y": 2,
+            "cols": 4,
+            "rows": 2
+          },
+          "reference": false
+        },
+        {
+          "unique_key": "0de7df52-d74d-4c42-9dc5-0ae78e8ee236",
+          "location": {
+            "x": 0,
+            "y": 14,
+            "cols": 12,
+            "rows": 3
+          },
+          "reference": false
+        },
+        {
+          "unique_key": "a3371b68-40bc-4635-88b8-f9e0c7e0b926",
+          "location": {
+            "x": 0,
+            "y": 8,
+            "cols": 4,
+            "rows": 3
+          },
+          "reference": false
+        },
+        {
+          "unique_key": "a0806d23-03ed-4f60-9779-f52a41f8f2ca",
+          "location": {
+            "x": 4,
+            "y": 4,
+            "cols": 8,
+            "rows": 2
+          },
+          "reference": false
+        },
+        {
+          "unique_key": "0f2216be-dbdb-41a8-ab58-7d27b2505ac1",
+          "location": {
+            "x": 4,
+            "y": 8,
+            "cols": 8,
+            "rows": 2
+          },
+          "reference": false
+        }
+      ],
+      "parent": null,
+      "feature": null,
+      "unique_key": "81d467d3-f670-4abe-aedd-4e72d33a4415",
+      "name": "Servers Summary",
+      "private": null
+    }
+  ],
+  "widgets": [
+    {
+      "type": "proportional",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "Active Server Alerts",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": false,
+            "collapsed": true
+          }
+        },
+        "content": {
+          "properties": {
+            "isEditable": true
+          }
+        },
+        "chart": {
+          "providers": {
+            "dataSource": {
+              "providerId": "ProportionalSwqlDatasourceService",
+              "properties": {
+                "dataFields": [
+                  {
+                    "id": "TheCount",
+                    "label": "TheCount",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Link",
+                    "label": "Link",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Color",
+                    "label": "Color",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Severity",
+                    "label": "Severity",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "StatusIcon",
+                    "label": "StatusIcon",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "severity_order",
+                    "label": "severity_order",
+                    "dataType": "System.Int32"
+                  }
+                ],
+                "swql": "SELECT \nCount(c.AlertObject.AlertActive.TriggeredMessage) AS TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', c.InstanceSiteId, '_Orion.AlertConfigurations_Severity:eq:', c.Severity) \n  END AS Link\n, CASE WHEN c.Severity = 2 then '#950000' \n       WHEN c.Severity = 3 then '#DD2C00' \n       WHEN c.Severity = 1 then '#FEC405' \n       WHEN c.Severity = 0 then '#176998' \n       WHEN c.Severity = 4 then '#999999' END AS [Color]\n, CASE WHEN c.Severity = 2 then 'Critical' \n       WHEN c.Severity = 3 then 'Serious' \n       WHEN c.Severity = 1 then 'Warning' \n       WHEN c.Severity = 0 then 'Informational' \n       WHEN c.Severity = 4 then 'Notice' END AS [Severity] \n, CASE WHEN c.Severity = 2 then 'severity_critical' \n       WHEN c.Severity = 3 then 'severity_critical'  \n       WHEN c.Severity = 1 then 'severity_warning' \n       WHEN c.Severity = 0 then 'severity_info' \n       WHEN c.Severity = 4 then 'severity_info'  END AS [StatusIcon] \n, CASE WHEN c.Severity = 2 then 1 \n       WHEN c.Severity = 3 then 2 \n       WHEN c.Severity = 1 then 3 \n       WHEN c.Severity = 0 then 4 \n       WHEN c.Severity = 4 then 5 END AS [severity_order]\nFROM Orion.AlertConfigurations c\nLEFT JOIN \n(\n    SELECT TOP 1 '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName = 'Servers Summary - Alert Status'\n    ORDER BY DashboardID\n) D ON 1=1\nWHERE c.AlertObject.AlertActive.TriggeredMessage <> '' \nAND (c.AlertObject.Node.Category=2)\nGROUP BY c.Severity, D.Link, c.InstanceSiteId\nORDER BY severity_order",
+                "categoryField": "Severity",
+                "valueField": "TheCount",
+                "dataFormat": "custom",
+                "iconMappingField": "StatusIcon",
+                "colorMappingField": "Color",
+                "linkMappingField": "Link",
+                "type": "hand-edit",
+                "editor": {}
+              }
+            },
+            "adapter": {
+              "providerId": "NOVA_DATASOURCE_ADAPTER",
+              "properties": {
+                "componentId": "chart",
+                "propertyPath": "widgetData",
+                "dataSource": {
+                  "properties": {
+                    "dataFields": [
+                      {
+                        "id": "TheCount",
+                        "label": "TheCount",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Link",
+                        "label": "Link",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Color",
+                        "label": "Color",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Severity",
+                        "label": "Severity",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "StatusIcon",
+                        "label": "StatusIcon",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "severity_order",
+                        "label": "severity_order",
+                        "dataType": "System.Int32"
+                      }
+                    ],
+                    "swql": "SELECT \nCount(c.AlertObject.AlertActive.TriggeredMessage) AS TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', c.InstanceSiteId, '_Orion.AlertConfigurations_Severity:eq:', c.Severity) \n  END AS Link\n, CASE WHEN c.Severity = 2 then '#950000' \n       WHEN c.Severity = 3 then '#DD2C00' \n       WHEN c.Severity = 1 then '#FEC405' \n       WHEN c.Severity = 0 then '#176998' \n       WHEN c.Severity = 4 then '#999999' END AS [Color]\n, CASE WHEN c.Severity = 2 then 'Critical' \n       WHEN c.Severity = 3 then 'Serious' \n       WHEN c.Severity = 1 then 'Warning' \n       WHEN c.Severity = 0 then 'Informational' \n       WHEN c.Severity = 4 then 'Notice' END AS [Severity] \n, CASE WHEN c.Severity = 2 then 'severity_critical' \n       WHEN c.Severity = 3 then 'severity_critical'  \n       WHEN c.Severity = 1 then 'severity_warning' \n       WHEN c.Severity = 0 then 'severity_info' \n       WHEN c.Severity = 4 then 'severity_info'  END AS [StatusIcon] \n, CASE WHEN c.Severity = 2 then 1 \n       WHEN c.Severity = 3 then 2 \n       WHEN c.Severity = 1 then 3 \n       WHEN c.Severity = 0 then 4 \n       WHEN c.Severity = 4 then 5 END AS [severity_order]\nFROM Orion.AlertConfigurations c\nLEFT JOIN \n(\n    SELECT TOP 1 '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName = 'Servers Summary - Alert Status'\n    ORDER BY DashboardID\n) D ON 1=1\nWHERE c.AlertObject.AlertActive.TriggeredMessage <> '' \nAND (c.AlertObject.Node.Category=2)\nGROUP BY c.Severity, D.Link, c.InstanceSiteId\nORDER BY severity_order",
+                    "categoryField": "Severity",
+                    "valueField": "TheCount",
+                    "dataFormat": "custom",
+                    "iconMappingField": "StatusIcon",
+                    "colorMappingField": "Color",
+                    "linkMappingField": "Link",
+                    "type": "hand-edit",
+                    "editor": {}
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "chartOptions": {
+                "type": "DonutChart",
+                "legendPlacement": "Right",
+                "legendFormatter": {
+                  "componentType": "GenericValueFormatterComponent"
+                }
+              }
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "52ad9838-b1f9-4ee9-8a06-3a74c5743d0f",
+      "name": "Active Server Alerts",
+      "private": false
+    },
+    {
+      "type": "table",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "Top 10 Components by Response Time",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": false,
+            "collapsed": true
+          }
+        },
+        "table": {
+          "providers": {
+            "dataSource": {
+              "providerId": "TableSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT TOP 10 s.Component.Status as ComponentStatus, s.Component.DetailsUrl as CDetailsUrl, s.Component.Name as [Component Name]\n, s.Component.Application.Status as ApplicationStatus, s.Component.Application.DetailsUrl as ADetailsUrl, s.Component.Application.Name as [Application Name]\n, s.Component.Application.Node.Status as NodeStatus, s.Component.Application.Node.DetailsUrl as NDetailsUrl, s.Component.Application.Node.Caption as [Node Name]\n, ROUND(ComponentResponseTime,2) as [Response Time]\nFROM Orion.APM.CurrentStatistics s\nWHERE ComponentResponseTime is not NULL\nORDER BY ComponentResponseTime desc",
+                "dataFields": [
+                  {
+                    "id": "ComponentStatus",
+                    "label": "ComponentStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "CDetailsUrl",
+                    "label": "CDetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Component Name",
+                    "label": "Component Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "ApplicationStatus",
+                    "label": "ApplicationStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "ADetailsUrl",
+                    "label": "ADetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Application Name",
+                    "label": "Application Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "NodeStatus",
+                    "label": "NodeStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "NDetailsUrl",
+                    "label": "NDetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Node Name",
+                    "label": "Node Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Response Time",
+                    "label": "Response Time",
+                    "dataType": "System.Int64"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "properties": {
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT TOP 10 s.Component.Status as ComponentStatus, s.Component.DetailsUrl as CDetailsUrl, s.Component.Name as [Component Name]\n, s.Component.Application.Status as ApplicationStatus, s.Component.Application.DetailsUrl as ADetailsUrl, s.Component.Application.Name as [Application Name]\n, s.Component.Application.Node.Status as NodeStatus, s.Component.Application.Node.DetailsUrl as NDetailsUrl, s.Component.Application.Node.Caption as [Node Name]\n, ROUND(ComponentResponseTime,2) as [Response Time]\nFROM Orion.APM.CurrentStatistics s\nWHERE ComponentResponseTime is not NULL\nORDER BY ComponentResponseTime desc",
+                    "dataFields": [
+                      {
+                        "id": "ComponentStatus",
+                        "label": "ComponentStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "CDetailsUrl",
+                        "label": "CDetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Component Name",
+                        "label": "Component Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "ApplicationStatus",
+                        "label": "ApplicationStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "ADetailsUrl",
+                        "label": "ADetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Application Name",
+                        "label": "Application Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "NodeStatus",
+                        "label": "NodeStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "NDetailsUrl",
+                        "label": "NDetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Node Name",
+                        "label": "Node Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Response Time",
+                        "label": "Response Time",
+                        "dataType": "System.Int64"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "columns": [
+                {
+                  "id": "column_8dc4f3b6-e9a1-45c0-9e8d-41bfab63f0a3",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "ComponentStatus",
+                        "vendor": null,
+                        "link": "CDetailsUrl",
+                        "value": "Component Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "application-monitor"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Component Name"
+                },
+                {
+                  "id": "column_7a0c2374-67a8-4a03-bd41-aed4fcea7c50",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "ApplicationStatus",
+                        "vendor": null,
+                        "link": "ADetailsUrl",
+                        "value": "Application Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "application"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Application Name"
+                },
+                {
+                  "id": "column_17e671f0-bda3-4893-b0d8-c7e0a954ef08",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "NodeStatus",
+                        "vendor": null,
+                        "link": "NDetailsUrl",
+                        "value": "Node Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "server"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Node Name"
+                },
+                {
+                  "id": "column_4359b534-aa4c-435b-b8a0-6d526c31b1a6",
+                  "formatter": {
+                    "componentType": "SimpleNumberFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Response Time"
+                      },
+                      "prefixIcon": "",
+                      "suffixText": " ms"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Response Time"
+                }
+              ],
+              "sorterConfiguration": {
+                "sortBy": "column_4359b534-aa4c-435b-b8a0-6d526c31b1a6",
+                "descendantSorting": true
+              },
+              "hasVirtualScroll": true
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "b83a6684-cd9b-4c59-b927-5772bd81f830",
+      "name": "Top 10 Components by Response Time",
+      "private": false
+    },
+    {
+      "type": "table",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "Top 10 Components by IO Rate",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": false,
+            "collapsed": true
+          }
+        },
+        "table": {
+          "providers": {
+            "dataSource": {
+              "providerId": "TableSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT TOP 10 s.Component.Status as ComponentStatus, s.Component.DetailsUrl as CDetailsUrl, s.Component.Name as [Component Name]\n, s.Component.Application.Status as ApplicationStatus, s.Component.Application.DetailsUrl as ADetailsUrl, s.Component.Application.Name as [Application Name]\n, s.Component.Application.Node.Status as NodeStatus, s.Component.Application.Node.DetailsUrl as NDetailsUrl, s.Component.Application.Node.Caption as [Node Name]\n, ROUND(ComponentIOTotalOperationsPerSec,2) as [IO Rate]\nFROM Orion.APM.CurrentStatistics s\nWHERE ComponentIOTotalOperationsPerSec >=0\nORDER BY ComponentIOTotalOperationsPerSec desc",
+                "dataFields": [
+                  {
+                    "id": "ComponentStatus",
+                    "label": "ComponentStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "CDetailsUrl",
+                    "label": "CDetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Component Name",
+                    "label": "Component Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "ApplicationStatus",
+                    "label": "ApplicationStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "ADetailsUrl",
+                    "label": "ADetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Application Name",
+                    "label": "Application Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "NodeStatus",
+                    "label": "NodeStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "NDetailsUrl",
+                    "label": "NDetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Node Name",
+                    "label": "Node Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "IO Rate",
+                    "label": "IO Rate",
+                    "dataType": "System.Double"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "properties": {
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT TOP 10 s.Component.Status as ComponentStatus, s.Component.DetailsUrl as CDetailsUrl, s.Component.Name as [Component Name]\n, s.Component.Application.Status as ApplicationStatus, s.Component.Application.DetailsUrl as ADetailsUrl, s.Component.Application.Name as [Application Name]\n, s.Component.Application.Node.Status as NodeStatus, s.Component.Application.Node.DetailsUrl as NDetailsUrl, s.Component.Application.Node.Caption as [Node Name]\n, ROUND(ComponentIOTotalOperationsPerSec,2) as [IO Rate]\nFROM Orion.APM.CurrentStatistics s\nWHERE ComponentIOTotalOperationsPerSec >=0\nORDER BY ComponentIOTotalOperationsPerSec desc",
+                    "dataFields": [
+                      {
+                        "id": "ComponentStatus",
+                        "label": "ComponentStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "CDetailsUrl",
+                        "label": "CDetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Component Name",
+                        "label": "Component Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "ApplicationStatus",
+                        "label": "ApplicationStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "ADetailsUrl",
+                        "label": "ADetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Application Name",
+                        "label": "Application Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "NodeStatus",
+                        "label": "NodeStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "NDetailsUrl",
+                        "label": "NDetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Node Name",
+                        "label": "Node Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "IO Rate",
+                        "label": "IO Rate",
+                        "dataType": "System.Double"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "columns": [
+                {
+                  "id": "column_8dc4f3b6-e9a1-45c0-9e8d-41bfab63f0a3",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "ComponentStatus",
+                        "vendor": null,
+                        "link": "CDetailsUrl",
+                        "value": "Component Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "application-monitor"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Component Name"
+                },
+                {
+                  "id": "column_7a0c2374-67a8-4a03-bd41-aed4fcea7c50",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "ApplicationStatus",
+                        "vendor": null,
+                        "link": "ADetailsUrl",
+                        "value": "Application Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "application"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Application Name"
+                },
+                {
+                  "id": "column_17e671f0-bda3-4893-b0d8-c7e0a954ef08",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "NodeStatus",
+                        "vendor": null,
+                        "link": "NDetailsUrl",
+                        "value": "Node Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "server"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Node Name"
+                },
+                {
+                  "id": "column_6fd2fb05-069d-4f1a-84fe-89fe54599b72",
+                  "label": "IO Rate",
+                  "isActive": true,
+                  "formatter": {
+                    "componentType": "SimpleNumberFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "IO Rate"
+                      },
+                      "prefixIcon": "",
+                      "suffixText": "/ sec"
+                    }
+                  }
+                }
+              ],
+              "sorterConfiguration": {
+                "sortBy": "column_6fd2fb05-069d-4f1a-84fe-89fe54599b72",
+                "descendantSorting": true
+              },
+              "hasVirtualScroll": true
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "889d6a1c-642b-49ba-b45e-55ee4bd2e6c4",
+      "name": "Top 10 Components by IO Rate",
+      "private": false
+    },
+    {
+      "type": "kpi",
+      "configuration": {
+        "/": {
+          "providers": {
+            "interactionHandler": {
+              "providerId": "NOVA_URL_INTERACTION_HANDLER",
+              "properties": {
+                "url": "${data.rowData.Link}",
+                "newWindow": true
+              }
+            }
+          }
+        },
+        "header": {
+          "properties": {
+            "title": "All Servers by Status",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": false,
+            "collapsed": true
+          }
+        },
+        "tiles": {
+          "properties": {
+            "nodes": [
+              "kpi_4eb21f86-b256-45c4-9746-a335fe0b0181",
+              "kpi_556516af-b901-4216-8d0f-38123ec80952",
+              "kpi_e2b0669f-6c93-4066-84e3-dcc268612d98",
+              "kpi_1f07bf4e-5630-4646-aae6-14ceac39c609",
+              "kpi_b1307edd-a07c-491d-b168-afbe336bba2c",
+              "kpi_0caa0898-92db-4a12-bf8b-820af4e5926a"
+            ]
+          }
+        },
+        "kpi_4eb21f86-b256-45c4-9746-a335fe0b0181": {
+          "id": "kpi_4eb21f86-b256-45c4-9746-a335fe0b0181",
+          "componentType": "KpiComponent",
+          "providers": {
+            "dataSource": {
+              "providerId": "KpiSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT N.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.Nodes_Status:eq:2') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.Nodes WHERE Category=2 AND Status = 2) N\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Server Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                "dataFields": [
+                  {
+                    "id": "TheCount",
+                    "label": "TheCount",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Link",
+                    "label": "Link",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "providerId": "NOVA_KPI_DATASOURCE_ADAPTER",
+              "properties": {
+                "componentId": "kpi_4eb21f86-b256-45c4-9746-a335fe0b0181",
+                "propertyPath": "widgetData",
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT N.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.Nodes_Status:eq:2') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.Nodes WHERE Category=2 AND Status = 2) N\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Server Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                    "dataFields": [
+                      {
+                        "id": "TheCount",
+                        "label": "TheCount",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Link",
+                        "label": "Link",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                },
+                "thresholds": {
+                  "criticalThresholdValue": 0,
+                  "warningThresholdValue": 0,
+                  "showThresholds": false,
+                  "reversedThresholds": false
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "interactive": true
+            },
+            "widgetData": {
+              "label": " ",
+              "backgroundColor": "var(--nui-color-semantic-down)",
+              "units": "Down"
+            }
+          }
+        },
+        "kpi_556516af-b901-4216-8d0f-38123ec80952": {
+          "id": "kpi_556516af-b901-4216-8d0f-38123ec80952",
+          "componentType": "KpiComponent",
+          "providers": {
+            "dataSource": {
+              "providerId": "KpiSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT N.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.Nodes_Status:eq:14') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.Nodes WHERE Category=2 AND Status = 14) N\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Server Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                "dataFields": [
+                  {
+                    "id": "TheCount",
+                    "label": "TheCount",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Link",
+                    "label": "Link",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "providerId": "NOVA_KPI_DATASOURCE_ADAPTER",
+              "properties": {
+                "componentId": "kpi_556516af-b901-4216-8d0f-38123ec80952",
+                "propertyPath": "widgetData",
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT N.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.Nodes_Status:eq:14') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.Nodes WHERE Category=2 AND Status = 14) N\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Server Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                    "dataFields": [
+                      {
+                        "id": "TheCount",
+                        "label": "TheCount",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Link",
+                        "label": "Link",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                },
+                "thresholds": {
+                  "criticalThresholdValue": 0,
+                  "warningThresholdValue": 0,
+                  "showThresholds": false,
+                  "reversedThresholds": false
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "interactive": true
+            },
+            "widgetData": {
+              "label": " ",
+              "backgroundColor": "var(--nui-color-semantic-critical)",
+              "units": "Critical"
+            }
+          }
+        },
+        "kpi_e2b0669f-6c93-4066-84e3-dcc268612d98": {
+          "id": "kpi_e2b0669f-6c93-4066-84e3-dcc268612d98",
+          "componentType": "KpiComponent",
+          "providers": {
+            "dataSource": {
+              "providerId": "KpiSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT N.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.Nodes_Status:eq:3') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.Nodes WHERE Category=2 AND Status = 3) N\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Server Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                "dataFields": [
+                  {
+                    "id": "TheCount",
+                    "label": "TheCount",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Link",
+                    "label": "Link",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "providerId": "NOVA_KPI_DATASOURCE_ADAPTER",
+              "properties": {
+                "componentId": "kpi_e2b0669f-6c93-4066-84e3-dcc268612d98",
+                "propertyPath": "widgetData",
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT N.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.Nodes_Status:eq:3') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.Nodes WHERE Category=2 AND Status = 3) N\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Server Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                    "dataFields": [
+                      {
+                        "id": "TheCount",
+                        "label": "TheCount",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Link",
+                        "label": "Link",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                },
+                "thresholds": {
+                  "criticalThresholdValue": 0,
+                  "warningThresholdValue": 0,
+                  "showThresholds": false,
+                  "reversedThresholds": false
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "interactive": true
+            },
+            "widgetData": {
+              "label": " ",
+              "backgroundColor": "var(--nui-color-semantic-warning)",
+              "units": "Warning"
+            }
+          }
+        },
+        "kpi_1f07bf4e-5630-4646-aae6-14ceac39c609": {
+          "id": "kpi_1f07bf4e-5630-4646-aae6-14ceac39c609",
+          "componentType": "KpiComponent",
+          "providers": {
+            "dataSource": {
+              "providerId": "KpiSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT N.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.Nodes_Status:eq:0') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.Nodes WHERE Category=2 AND Status = 0) N\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Server Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                "dataFields": [
+                  {
+                    "id": "TheCount",
+                    "label": "TheCount",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Link",
+                    "label": "Link",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "providerId": "NOVA_KPI_DATASOURCE_ADAPTER",
+              "properties": {
+                "componentId": "kpi_1f07bf4e-5630-4646-aae6-14ceac39c609",
+                "propertyPath": "widgetData",
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT N.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.Nodes_Status:eq:0') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.Nodes WHERE Category=2 AND Status = 0) N\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Server Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                    "dataFields": [
+                      {
+                        "id": "TheCount",
+                        "label": "TheCount",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Link",
+                        "label": "Link",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                },
+                "thresholds": {
+                  "criticalThresholdValue": 0,
+                  "warningThresholdValue": 0,
+                  "showThresholds": false,
+                  "reversedThresholds": false
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "interactive": true
+            },
+            "widgetData": {
+              "label": " ",
+              "backgroundColor": "var(--nui-color-semantic-unknown-bg)",
+              "units": "Unknown"
+            }
+          }
+        },
+        "kpi_b1307edd-a07c-491d-b168-afbe336bba2c": {
+          "id": "kpi_b1307edd-a07c-491d-b168-afbe336bba2c",
+          "componentType": "KpiComponent",
+          "providers": {
+            "dataSource": {
+              "providerId": "KpiSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT N.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.Nodes_Status:ne:0-', d.InstanceSiteId, '_Orion.Nodes_Status:ne:1-', d.InstanceSiteId, '_Orion.Nodes_Status:ne:2-', d.InstanceSiteId, '_Orion.Nodes_Status:ne:3-', d.InstanceSiteId, '_Orion.Nodes_Status:ne:14') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.Nodes WHERE Category=2 AND Status not in (0,1,2,3,14)) N\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Server Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                "dataFields": [
+                  {
+                    "id": "TheCount",
+                    "label": "TheCount",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Link",
+                    "label": "Link",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "providerId": "NOVA_KPI_DATASOURCE_ADAPTER",
+              "properties": {
+                "componentId": "kpi_b1307edd-a07c-491d-b168-afbe336bba2c",
+                "propertyPath": "widgetData",
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT N.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.Nodes_Status:ne:0-', d.InstanceSiteId, '_Orion.Nodes_Status:ne:1-', d.InstanceSiteId, '_Orion.Nodes_Status:ne:2-', d.InstanceSiteId, '_Orion.Nodes_Status:ne:3-', d.InstanceSiteId, '_Orion.Nodes_Status:ne:14') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.Nodes WHERE Category=2 AND Status not in (0,1,2,3,14)) N\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Server Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                    "dataFields": [
+                      {
+                        "id": "TheCount",
+                        "label": "TheCount",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Link",
+                        "label": "Link",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                },
+                "thresholds": {
+                  "criticalThresholdValue": 0,
+                  "warningThresholdValue": 0,
+                  "showThresholds": false,
+                  "reversedThresholds": false
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "interactive": true
+            },
+            "widgetData": {
+              "label": " ",
+              "backgroundColor": "var(--nui-color-semantic-info)",
+              "units": "Other"
+            }
+          }
+        },
+        "kpi_0caa0898-92db-4a12-bf8b-820af4e5926a": {
+          "id": "kpi_0caa0898-92db-4a12-bf8b-820af4e5926a",
+          "componentType": "KpiComponent",
+          "providers": {
+            "dataSource": {
+              "providerId": "KpiSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT N.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.Nodes_Status:eq:1') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.Nodes WHERE Category=2 AND Status = 1) N\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Server Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                "dataFields": [
+                  {
+                    "id": "TheCount",
+                    "label": "TheCount",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Link",
+                    "label": "Link",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "providerId": "NOVA_KPI_DATASOURCE_ADAPTER",
+              "properties": {
+                "componentId": "kpi_0caa0898-92db-4a12-bf8b-820af4e5926a",
+                "propertyPath": "widgetData",
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT N.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.Nodes_Status:eq:1') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.Nodes WHERE Category=2 AND Status = 1) N\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Server Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                    "dataFields": [
+                      {
+                        "id": "TheCount",
+                        "label": "TheCount",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Link",
+                        "label": "Link",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                },
+                "thresholds": {
+                  "criticalThresholdValue": 0,
+                  "warningThresholdValue": 0,
+                  "showThresholds": false,
+                  "reversedThresholds": false
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "interactive": true
+            },
+            "widgetData": {
+              "label": " ",
+              "backgroundColor": "var(--nui-color-semantic-ok)",
+              "units": "Up"
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "751bb079-62d7-4cf3-827b-5e42dd393568",
+      "name": "All Servers by Status",
+      "private": false
+    },
+    {
+      "type": "kpi",
+      "configuration": {
+        "/": {
+          "providers": {
+            "interactionHandler": {
+              "providerId": "NOVA_URL_INTERACTION_HANDLER",
+              "properties": {
+                "url": "${data.rowData.Link}",
+                "newWindow": true
+              }
+            }
+          }
+        },
+        "header": {
+          "properties": {
+            "title": "All Applications by Status",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": false,
+            "collapsed": true
+          }
+        },
+        "tiles": {
+          "properties": {
+            "nodes": [
+              "kpi_4eb21f86-b256-45c4-9746-a335fe0b0181",
+              "kpi_556516af-b901-4216-8d0f-38123ec80952",
+              "kpi_e2b0669f-6c93-4066-84e3-dcc268612d98",
+              "kpi_1f07bf4e-5630-4646-aae6-14ceac39c609",
+              "kpi_b1307edd-a07c-491d-b168-afbe336bba2c",
+              "kpi_0caa0898-92db-4a12-bf8b-820af4e5926a"
+            ]
+          }
+        },
+        "kpi_4eb21f86-b256-45c4-9746-a335fe0b0181": {
+          "id": "kpi_4eb21f86-b256-45c4-9746-a335fe0b0181",
+          "componentType": "KpiComponent",
+          "providers": {
+            "dataSource": {
+              "providerId": "KpiSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT A.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.APM.Application_Status:eq:2') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.APM.Application WHERE Status = 2) A\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Application Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                "dataFields": [
+                  {
+                    "id": "TheCount",
+                    "label": "TheCount",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Link",
+                    "label": "Link",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "providerId": "NOVA_KPI_DATASOURCE_ADAPTER",
+              "properties": {
+                "componentId": "kpi_4eb21f86-b256-45c4-9746-a335fe0b0181",
+                "propertyPath": "widgetData",
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT A.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.APM.Application_Status:eq:2') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.APM.Application WHERE Status = 2) A\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Application Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                    "dataFields": [
+                      {
+                        "id": "TheCount",
+                        "label": "TheCount",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Link",
+                        "label": "Link",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                },
+                "thresholds": {
+                  "criticalThresholdValue": 0,
+                  "warningThresholdValue": 0,
+                  "showThresholds": false,
+                  "reversedThresholds": false
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "interactive": true
+            },
+            "widgetData": {
+              "label": " ",
+              "backgroundColor": "var(--nui-color-semantic-down)",
+              "units": "Down"
+            }
+          }
+        },
+        "kpi_556516af-b901-4216-8d0f-38123ec80952": {
+          "id": "kpi_556516af-b901-4216-8d0f-38123ec80952",
+          "componentType": "KpiComponent",
+          "providers": {
+            "dataSource": {
+              "providerId": "KpiSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT A.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.APM.Application_Status:eq:14') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.APM.Application WHERE Status = 14) A\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Application Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                "dataFields": [
+                  {
+                    "id": "TheCount",
+                    "label": "TheCount",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Link",
+                    "label": "Link",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "providerId": "NOVA_KPI_DATASOURCE_ADAPTER",
+              "properties": {
+                "componentId": "kpi_556516af-b901-4216-8d0f-38123ec80952",
+                "propertyPath": "widgetData",
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT A.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.APM.Application_Status:eq:14') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.APM.Application WHERE Status = 14) A\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Application Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                    "dataFields": [
+                      {
+                        "id": "TheCount",
+                        "label": "TheCount",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Link",
+                        "label": "Link",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                },
+                "thresholds": {
+                  "criticalThresholdValue": 0,
+                  "warningThresholdValue": 0,
+                  "showThresholds": false,
+                  "reversedThresholds": false
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "interactive": true
+            },
+            "widgetData": {
+              "label": " ",
+              "backgroundColor": "var(--nui-color-semantic-critical)",
+              "units": "Critical"
+            }
+          }
+        },
+        "kpi_e2b0669f-6c93-4066-84e3-dcc268612d98": {
+          "id": "kpi_e2b0669f-6c93-4066-84e3-dcc268612d98",
+          "componentType": "KpiComponent",
+          "providers": {
+            "dataSource": {
+              "providerId": "KpiSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT A.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.APM.Application_Status:eq:3') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.APM.Application WHERE Status = 3) A\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Application Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                "dataFields": [
+                  {
+                    "id": "TheCount",
+                    "label": "TheCount",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Link",
+                    "label": "Link",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "providerId": "NOVA_KPI_DATASOURCE_ADAPTER",
+              "properties": {
+                "componentId": "kpi_e2b0669f-6c93-4066-84e3-dcc268612d98",
+                "propertyPath": "widgetData",
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT A.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.APM.Application_Status:eq:3') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.APM.Application WHERE Status = 3) A\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Application Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                    "dataFields": [
+                      {
+                        "id": "TheCount",
+                        "label": "TheCount",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Link",
+                        "label": "Link",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                },
+                "thresholds": {
+                  "criticalThresholdValue": 0,
+                  "warningThresholdValue": 0,
+                  "showThresholds": false,
+                  "reversedThresholds": false
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "interactive": true
+            },
+            "widgetData": {
+              "label": " ",
+              "backgroundColor": "var(--nui-color-semantic-warning)",
+              "units": "Warning"
+            }
+          }
+        },
+        "kpi_1f07bf4e-5630-4646-aae6-14ceac39c609": {
+          "id": "kpi_1f07bf4e-5630-4646-aae6-14ceac39c609",
+          "componentType": "KpiComponent",
+          "providers": {
+            "dataSource": {
+              "providerId": "KpiSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT A.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.APM.Application_Status:eq:0') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.APM.Application WHERE Status = 0) A\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Application Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                "dataFields": [
+                  {
+                    "id": "TheCount",
+                    "label": "TheCount",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Link",
+                    "label": "Link",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "providerId": "NOVA_KPI_DATASOURCE_ADAPTER",
+              "properties": {
+                "componentId": "kpi_1f07bf4e-5630-4646-aae6-14ceac39c609",
+                "propertyPath": "widgetData",
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT A.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.APM.Application_Status:eq:0') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.APM.Application WHERE Status = 0) A\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Application Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                    "dataFields": [
+                      {
+                        "id": "TheCount",
+                        "label": "TheCount",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Link",
+                        "label": "Link",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                },
+                "thresholds": {
+                  "criticalThresholdValue": 0,
+                  "warningThresholdValue": 0,
+                  "showThresholds": false,
+                  "reversedThresholds": false
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "interactive": true
+            },
+            "widgetData": {
+              "label": " ",
+              "backgroundColor": "var(--nui-color-semantic-unknown-bg)",
+              "units": "Unknown"
+            }
+          }
+        },
+        "kpi_b1307edd-a07c-491d-b168-afbe336bba2c": {
+          "id": "kpi_b1307edd-a07c-491d-b168-afbe336bba2c",
+          "componentType": "KpiComponent",
+          "providers": {
+            "dataSource": {
+              "providerId": "KpiSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT A.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.APM.Application_Status:ne:0-', d.InstanceSiteId, '_Orion.APM.Application_Status:ne:1-', d.InstanceSiteId, '_Orion.APM.Application_Status:ne:2-', d.InstanceSiteId, '_Orion.APM.Application_Status:ne:3-', d.InstanceSiteId, '_Orion.APM.Application_Status:ne:14') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.APM.Application WHERE Status not in (0,1,2,3,14)) A\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Application Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                "dataFields": [
+                  {
+                    "id": "TheCount",
+                    "label": "TheCount",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Link",
+                    "label": "Link",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "providerId": "NOVA_KPI_DATASOURCE_ADAPTER",
+              "properties": {
+                "componentId": "kpi_b1307edd-a07c-491d-b168-afbe336bba2c",
+                "propertyPath": "widgetData",
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT A.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.APM.Application_Status:ne:0-', d.InstanceSiteId, '_Orion.APM.Application_Status:ne:1-', d.InstanceSiteId, '_Orion.APM.Application_Status:ne:2-', d.InstanceSiteId, '_Orion.APM.Application_Status:ne:3-', d.InstanceSiteId, '_Orion.APM.Application_Status:ne:14') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.APM.Application WHERE Status not in (0,1,2,3,14)) A\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Application Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                    "dataFields": [
+                      {
+                        "id": "TheCount",
+                        "label": "TheCount",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Link",
+                        "label": "Link",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                },
+                "thresholds": {
+                  "criticalThresholdValue": 0,
+                  "warningThresholdValue": 0,
+                  "showThresholds": false,
+                  "reversedThresholds": false
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "interactive": true
+            },
+            "widgetData": {
+              "label": " ",
+              "backgroundColor": "var(--nui-color-semantic-info)",
+              "units": "Other"
+            }
+          }
+        },
+        "kpi_0caa0898-92db-4a12-bf8b-820af4e5926a": {
+          "id": "kpi_0caa0898-92db-4a12-bf8b-820af4e5926a",
+          "componentType": "KpiComponent",
+          "providers": {
+            "dataSource": {
+              "providerId": "KpiSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT A.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.APM.Application_Status:eq:1') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.APM.Application WHERE Status = 1) A\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Application Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                "dataFields": [
+                  {
+                    "id": "TheCount",
+                    "label": "TheCount",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Link",
+                    "label": "Link",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "providerId": "NOVA_KPI_DATASOURCE_ADAPTER",
+              "properties": {
+                "componentId": "kpi_0caa0898-92db-4a12-bf8b-820af4e5926a",
+                "propertyPath": "widgetData",
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT A.TheCount\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', d.InstanceSiteId, '_Orion.APM.Application_Status:eq:1') \n  END AS Link\nFROM \n(SELECT COUNT(1) as TheCount FROM Orion.APM.Application WHERE Status = 1) A\nLEFT JOIN \n(\n    SELECT TOP 1 InstanceSiteId, '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName='Servers Summary - Application Status'\n    ORDER BY DashboardID\n) D ON 1=1",
+                    "dataFields": [
+                      {
+                        "id": "TheCount",
+                        "label": "TheCount",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Link",
+                        "label": "Link",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                },
+                "thresholds": {
+                  "criticalThresholdValue": 0,
+                  "warningThresholdValue": 0,
+                  "showThresholds": false,
+                  "reversedThresholds": false
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "interactive": true
+            },
+            "widgetData": {
+              "label": " ",
+              "backgroundColor": "var(--nui-color-semantic-ok)",
+              "units": "Up"
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "68b04a00-47e7-4d7e-ae5a-35c31852e2b5",
+      "name": "All Applications by Status",
+      "private": false
+    },
+    {
+      "type": "table",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "Top 10 Components by Memory",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": false,
+            "collapsed": true
+          }
+        },
+        "table": {
+          "providers": {
+            "dataSource": {
+              "providerId": "TableSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT TOP 10 s.Component.Status as ComponentStatus, s.Component.DetailsUrl as CDetailsUrl, s.Component.Name as [Component Name]\n, s.Component.Application.Status as ApplicationStatus, s.Component.Application.DetailsUrl as ADetailsUrl, s.Component.Application.Name as [Application Name]\n, s.Component.Application.Node.Status as NodeStatus, s.Component.Application.Node.DetailsUrl as NDetailsUrl, s.Component.Application.Node.Caption as [Node Name]\n, ROUND(ComponentPercentMemory,2) as [Memory Usage]\nFROM Orion.APM.CurrentStatistics s\nWHERE ComponentPercentMemory >=0\nORDER BY ComponentPercentMemory desc",
+                "dataFields": [
+                  {
+                    "id": "ComponentStatus",
+                    "label": "ComponentStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "CDetailsUrl",
+                    "label": "CDetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Component Name",
+                    "label": "Component Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "ApplicationStatus",
+                    "label": "ApplicationStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "ADetailsUrl",
+                    "label": "ADetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Application Name",
+                    "label": "Application Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "NodeStatus",
+                    "label": "NodeStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "NDetailsUrl",
+                    "label": "NDetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Node Name",
+                    "label": "Node Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Memory Usage",
+                    "label": "Memory Usage",
+                    "dataType": "System.Double"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "properties": {
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT TOP 10 s.Component.Status as ComponentStatus, s.Component.DetailsUrl as CDetailsUrl, s.Component.Name as [Component Name]\n, s.Component.Application.Status as ApplicationStatus, s.Component.Application.DetailsUrl as ADetailsUrl, s.Component.Application.Name as [Application Name]\n, s.Component.Application.Node.Status as NodeStatus, s.Component.Application.Node.DetailsUrl as NDetailsUrl, s.Component.Application.Node.Caption as [Node Name]\n, ROUND(ComponentPercentMemory,2) as [Memory Usage]\nFROM Orion.APM.CurrentStatistics s\nWHERE ComponentPercentMemory >=0\nORDER BY ComponentPercentMemory desc",
+                    "dataFields": [
+                      {
+                        "id": "ComponentStatus",
+                        "label": "ComponentStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "CDetailsUrl",
+                        "label": "CDetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Component Name",
+                        "label": "Component Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "ApplicationStatus",
+                        "label": "ApplicationStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "ADetailsUrl",
+                        "label": "ADetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Application Name",
+                        "label": "Application Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "NodeStatus",
+                        "label": "NodeStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "NDetailsUrl",
+                        "label": "NDetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Node Name",
+                        "label": "Node Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Memory Usage",
+                        "label": "Memory Usage",
+                        "dataType": "System.Double"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "columns": [
+                {
+                  "id": "column_8dc4f3b6-e9a1-45c0-9e8d-41bfab63f0a3",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "ComponentStatus",
+                        "vendor": null,
+                        "link": "CDetailsUrl",
+                        "value": "Component Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "application-monitor"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Component Name"
+                },
+                {
+                  "id": "column_7a0c2374-67a8-4a03-bd41-aed4fcea7c50",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "ApplicationStatus",
+                        "vendor": null,
+                        "link": "ADetailsUrl",
+                        "value": "Application Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "application"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Application Name"
+                },
+                {
+                  "id": "column_17e671f0-bda3-4893-b0d8-c7e0a954ef08",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "NodeStatus",
+                        "vendor": null,
+                        "link": "NDetailsUrl",
+                        "value": "Node Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "server"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Node Name"
+                },
+                {
+                  "id": "column_0d979c09-0ae8-404d-917d-a29b02ea705a",
+                  "label": "Memory Usage",
+                  "isActive": true,
+                  "formatter": {
+                    "componentType": "SimpleNumberFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Memory Usage"
+                      },
+                      "prefixIcon": "",
+                      "suffixText": "%"
+                    }
+                  }
+                }
+              ],
+              "sorterConfiguration": {
+                "sortBy": "column_0d979c09-0ae8-404d-917d-a29b02ea705a",
+                "descendantSorting": true
+              },
+              "hasVirtualScroll": true
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "8f85b333-ed7c-477e-b0bd-970f1c9eea49",
+      "name": "Top 10 Components by Memory",
+      "private": false
+    },
+    {
+      "type": "table",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "Server Warranty Summary",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": false,
+            "collapsed": true
+          }
+        },
+        "table": {
+          "providers": {
+            "dataSource": {
+              "providerId": "TableSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT NodeName as [Server Name], ExpirationDays as [Days Left], ExpirationDate as [Expiration Date], DetailsUrl, s.StatusID as WStatus\nFROM Orion.AssetInventory.NodeWarrantyAlert w \nINNER JOIN Orion.StatusInfo s ON w.WarrantyStatus=s.StatusName\nWHERE ExpirationDate is not null",
+                "dataFields": [
+                  {
+                    "id": "Server Name",
+                    "label": "Server Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Days Left",
+                    "label": "Days Left",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Expiration Date",
+                    "label": "Expiration Date",
+                    "dataType": "System.DateTime"
+                  },
+                  {
+                    "id": "DetailsUrl",
+                    "label": "DetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "WStatus",
+                    "label": "WStatus",
+                    "dataType": "System.Int32"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "properties": {
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT NodeName as [Server Name], ExpirationDays as [Days Left], ExpirationDate as [Expiration Date], DetailsUrl, s.StatusID as WStatus\nFROM Orion.AssetInventory.NodeWarrantyAlert w \nINNER JOIN Orion.StatusInfo s ON w.WarrantyStatus=s.StatusName\nWHERE ExpirationDate is not null",
+                    "dataFields": [
+                      {
+                        "id": "Server Name",
+                        "label": "Server Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Days Left",
+                        "label": "Days Left",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Expiration Date",
+                        "label": "Expiration Date",
+                        "dataType": "System.DateTime"
+                      },
+                      {
+                        "id": "DetailsUrl",
+                        "label": "DetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "WStatus",
+                        "label": "WStatus",
+                        "dataType": "System.Int32"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "columns": [
+                {
+                  "id": "column_efc512e9-a79e-4aa2-9b8d-5e2d87cf5bab",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "WStatus",
+                        "vendor": null,
+                        "link": "DetailsUrl",
+                        "value": "Server Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "server"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Server Name"
+                },
+                {
+                  "id": "column_2f011e30-7682-46e7-8b03-436e2e6e61e5",
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Days Left"
+                      }
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Days Left"
+                },
+                {
+                  "id": "column_b8b517a7-697d-453b-be61-38a286c505e4",
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Expiration Date"
+                      }
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Expiration Date"
+                }
+              ],
+              "sorterConfiguration": {
+                "sortBy": "column_2f011e30-7682-46e7-8b03-436e2e6e61e5",
+                "descendantSorting": ""
+              },
+              "hasVirtualScroll": true,
+              "searchConfiguration": {
+                "enabled": true
+              }
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "8d73f305-73ab-4e5c-99ff-a9bac32ef37d",
+      "name": "Server Warranty Summary",
+      "private": false
+    },
+    {
+      "type": "table",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "All Applications",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": false,
+            "collapsed": true
+          }
+        },
+        "table": {
+          "providers": {
+            "dataSource": {
+              "providerId": "TableSwqlDatasourceService",
+              "properties": {
+                "swql": "Select A.Name as [Application Name] ,A.DetailsUrl as [ADetailsUrl], A.Status as ApplicationStatus, A.Node.Caption as [Node Name], A.Node.Status as NodeStatus, A.Node.DetailsURL as [NDetailsUrl]\nFROM Orion.APM.Application A",
+                "dataFields": [
+                  {
+                    "id": "Application Name",
+                    "label": "Application Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "ADetailsUrl",
+                    "label": "ADetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "ApplicationStatus",
+                    "label": "ApplicationStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Node Name",
+                    "label": "Node Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "NodeStatus",
+                    "label": "NodeStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "NDetailsUrl",
+                    "label": "NDetailsUrl",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "properties": {
+                "dataSource": {
+                  "properties": {
+                    "swql": "Select A.Name as [Application Name] ,A.DetailsUrl as [ADetailsUrl], A.Status as ApplicationStatus, A.Node.Caption as [Node Name], A.Node.Status as NodeStatus, A.Node.DetailsURL as [NDetailsUrl]\nFROM Orion.APM.Application A",
+                    "dataFields": [
+                      {
+                        "id": "Application Name",
+                        "label": "Application Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "ADetailsUrl",
+                        "label": "ADetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "ApplicationStatus",
+                        "label": "ApplicationStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Node Name",
+                        "label": "Node Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "NodeStatus",
+                        "label": "NodeStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "NDetailsUrl",
+                        "label": "NDetailsUrl",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "columns": [
+                {
+                  "id": "column_0ad830e1-f611-4c79-9610-c9d97c5912fe",
+                  "label": "Application",
+                  "isActive": true,
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "ApplicationStatus",
+                        "vendor": null,
+                        "link": "ADetailsUrl",
+                        "value": "Application Name"
+                      },
+                      "iconFormat": "status",
+                      "entityIcon": null
+                    }
+                  }
+                },
+                {
+                  "id": "column_1c462f3a-06a5-4941-a5c5-657273d5c711",
+                  "label": "Node Name",
+                  "isActive": true,
+                  "width": 200,
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "NodeStatus",
+                        "vendor": null,
+                        "link": "NDetailsUrl",
+                        "value": "Node Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "server"
+                    }
+                  }
+                }
+              ],
+              "sorterConfiguration": {
+                "sortBy": "column_0ad830e1-f611-4c79-9610-c9d97c5912fe",
+                "descendantSorting": ""
+              },
+              "hasVirtualScroll": true,
+              "searchConfiguration": {
+                "enabled": true
+              }
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "01bf6b98-89f1-47e3-88ed-588f6b0dba72",
+      "name": "All Applications",
+      "private": false
+    },
+    {
+      "type": "proportional",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "API Poller Overview",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": false,
+            "collapsed": true
+          }
+        },
+        "chart": {
+          "providers": {
+            "dataSource": {
+              "providerId": "ProportionalSwqlDatasourceService",
+              "properties": {
+                "dataFields": [
+                  {
+                    "id": "StatusDescription",
+                    "label": "StatusDescription",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "TheCount",
+                    "label": "TheCount",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Color",
+                    "label": "Color",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Icon",
+                    "label": "Icon",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Link",
+                    "label": "Link",
+                    "dataType": "System.String"
+                  }
+                ],
+                "swql": "SELECT A.StatusDescription, Count(1) as TheCount\n, case when A.Status=1 then '#00A753' else S.Color end as Color\n, 'status_' + S.IconPostfix as Icon\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', a.InstanceSiteId, '_Orion.APIPoller.ApiPoller_Status:eq:', a.Status) \n  END AS Link\nFROM Orion.APIPoller.ApiPoller A\nINNER JOIN Orion.StatusInfo S ON A.Status=S.StatusId\nLEFT JOIN \n(\n    SELECT TOP 1 '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName = 'Servers Summary - API Poller Status'\n    ORDER BY DashboardID\n) D ON 1=1\nGROUP BY A.Status, A.StatusDescription, S.Color, S.IconPostfix, D.Link, a.InstanceSiteId",
+                "categoryField": "StatusDescription",
+                "valueField": "TheCount",
+                "dataFormat": "custom",
+                "iconMappingField": "Icon",
+                "colorMappingField": "Color",
+                "linkMappingField": "Link",
+                "type": "hand-edit",
+                "editor": {}
+              }
+            },
+            "adapter": {
+              "providerId": "NOVA_DATASOURCE_ADAPTER",
+              "properties": {
+                "componentId": "chart",
+                "propertyPath": "widgetData",
+                "dataSource": {
+                  "properties": {
+                    "dataFields": [
+                      {
+                        "id": "StatusDescription",
+                        "label": "StatusDescription",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "TheCount",
+                        "label": "TheCount",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Color",
+                        "label": "Color",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Icon",
+                        "label": "Icon",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Link",
+                        "label": "Link",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "swql": "SELECT A.StatusDescription, Count(1) as TheCount\n, case when A.Status=1 then '#00A753' else S.Color end as Color\n, 'status_' + S.IconPostfix as Icon\n, CASE WHEN D.Link is null then NULL \n  ELSE CONCAT(D.Link,'?filters=', a.InstanceSiteId, '_Orion.APIPoller.ApiPoller_Status:eq:', a.Status) \n  END AS Link\nFROM Orion.APIPoller.ApiPoller A\nINNER JOIN Orion.StatusInfo S ON A.Status=S.StatusId\nLEFT JOIN \n(\n    SELECT TOP 1 '/apps/platform/dashboard/' + TOSTRING(DashboardID) as Link\n    FROM Orion.Dashboards.Instances\n    WHERE DisplayName = 'Servers Summary - API Poller Status'\n    ORDER BY DashboardID\n) D ON 1=1\nGROUP BY A.Status, A.StatusDescription, S.Color, S.IconPostfix, D.Link, a.InstanceSiteId",
+                    "categoryField": "StatusDescription",
+                    "valueField": "TheCount",
+                    "dataFormat": "custom",
+                    "iconMappingField": "Icon",
+                    "colorMappingField": "Color",
+                    "linkMappingField": "Link",
+                    "type": "hand-edit",
+                    "editor": {}
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "chartOptions": {
+                "type": "PieChart",
+                "legendPlacement": "Right",
+                "legendFormatter": {
+                  "componentType": "GenericValueFormatterComponent"
+                }
+              }
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "e66d1640-d72d-4ebe-959f-8e5e1555743e",
+      "name": "API Poller Overview",
+      "private": false
+    },
+    {
+      "type": "table",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "Last 10 Application Events",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": false,
+            "collapsed": true
+          }
+        },
+        "table": {
+          "providers": {
+            "dataSource": {
+              "providerId": "TableSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT TOP 10 E.EventTime as [Event Time], E.EventTypeProperties.Name as [Event Type], E.Message as [Event Message]\n, N.Caption as [Node Name], N.Status as NodeStatus, N.DetailsURL as NodeUrl\n, case  \n    when E.EventTypeProperties.Icon='Add' then 5\n    when E.EventTypeProperties.Icon='Critical' then 14\n    when E.EventTypeProperties.Icon='Disabled' then 27\n    when E.EventTypeProperties.Icon='Error' then 2\n    when E.EventTypeProperties.Icon='External' then 11\n    when E.EventTypeProperties.Icon='Green' then 1\n    when E.EventTypeProperties.Icon='Info' then 5\n    when E.EventTypeProperties.Icon='NotRunning' then 30\n    when E.EventTypeProperties.Icon='Red' then 2\n    when E.EventTypeProperties.Icon='RedAlert' then 14\n    when E.EventTypeProperties.Icon='RedYield' then 14\n    when E.EventTypeProperties.Icon='Shutdown' then 4\n    when E.EventTypeProperties.Icon='Start' then 5\n    when E.EventTypeProperties.Icon='Testing' then 5\n    when E.EventTypeProperties.Icon='Unknown' then 0\n    when E.EventTypeProperties.Icon='Unmanage' then 9\n    when E.EventTypeProperties.Icon='Unmanaged' then 9\n    when E.EventTypeProperties.Icon='Unplugged' then 10\n    when E.EventTypeProperties.Icon='Unreachable' then 12\n    when E.EventTypeProperties.Icon='Warn' then 3\n    else 0\nend as EventStatus\nFROM Orion.Events E\nLEFT JOIN Orion.Nodes N ON N.NodeID = E.NetworkNode\nWHERE E.EventType in (SELECT EventTypeID FROM Orion.APM.EventType)\nORDER By E.EventTime desc",
+                "dataFields": [
+                  {
+                    "id": "Event Time",
+                    "label": "Event Time",
+                    "dataType": "System.DateTime"
+                  },
+                  {
+                    "id": "Event Type",
+                    "label": "Event Type",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Event Message",
+                    "label": "Event Message",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Node Name",
+                    "label": "Node Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "NodeStatus",
+                    "label": "NodeStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "NodeUrl",
+                    "label": "NodeUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "EventStatus",
+                    "label": "EventStatus",
+                    "dataType": "System.Int32"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "properties": {
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT TOP 10 E.EventTime as [Event Time], E.EventTypeProperties.Name as [Event Type], E.Message as [Event Message]\n, N.Caption as [Node Name], N.Status as NodeStatus, N.DetailsURL as NodeUrl\n, case  \n    when E.EventTypeProperties.Icon='Add' then 5\n    when E.EventTypeProperties.Icon='Critical' then 14\n    when E.EventTypeProperties.Icon='Disabled' then 27\n    when E.EventTypeProperties.Icon='Error' then 2\n    when E.EventTypeProperties.Icon='External' then 11\n    when E.EventTypeProperties.Icon='Green' then 1\n    when E.EventTypeProperties.Icon='Info' then 5\n    when E.EventTypeProperties.Icon='NotRunning' then 30\n    when E.EventTypeProperties.Icon='Red' then 2\n    when E.EventTypeProperties.Icon='RedAlert' then 14\n    when E.EventTypeProperties.Icon='RedYield' then 14\n    when E.EventTypeProperties.Icon='Shutdown' then 4\n    when E.EventTypeProperties.Icon='Start' then 5\n    when E.EventTypeProperties.Icon='Testing' then 5\n    when E.EventTypeProperties.Icon='Unknown' then 0\n    when E.EventTypeProperties.Icon='Unmanage' then 9\n    when E.EventTypeProperties.Icon='Unmanaged' then 9\n    when E.EventTypeProperties.Icon='Unplugged' then 10\n    when E.EventTypeProperties.Icon='Unreachable' then 12\n    when E.EventTypeProperties.Icon='Warn' then 3\n    else 0\nend as EventStatus\nFROM Orion.Events E\nLEFT JOIN Orion.Nodes N ON N.NodeID = E.NetworkNode\nWHERE E.EventType in (SELECT EventTypeID FROM Orion.APM.EventType)\nORDER By E.EventTime desc",
+                    "dataFields": [
+                      {
+                        "id": "Event Time",
+                        "label": "Event Time",
+                        "dataType": "System.DateTime"
+                      },
+                      {
+                        "id": "Event Type",
+                        "label": "Event Type",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Event Message",
+                        "label": "Event Message",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Node Name",
+                        "label": "Node Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "NodeStatus",
+                        "label": "NodeStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "NodeUrl",
+                        "label": "NodeUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "EventStatus",
+                        "label": "EventStatus",
+                        "dataType": "System.Int32"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "columns": [
+                {
+                  "id": "column_13cb17c3-ebed-453f-9c97-39ff59c7c311",
+                  "label": "Event Time",
+                  "isActive": true,
+                  "width": null,
+                  "formatter": {
+                    "componentType": "DatetimeFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Event Time"
+                      },
+                      "option": "0",
+                      "replaceDate": false
+                    }
+                  }
+                },
+                {
+                  "id": "column_c8fd26a6-94c9-41af-979c-fef4b430d666",
+                  "label": "Event Type",
+                  "isActive": true,
+                  "width": null,
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "EventStatus",
+                        "vendor": null,
+                        "link": "NodeUrl",
+                        "value": "Event Type"
+                      },
+                      "iconFormat": "status",
+                      "entityIcon": null
+                    }
+                  }
+                },
+                {
+                  "id": "column_a84e11b8-8312-4644-8410-aaa161038013",
+                  "label": "Event Message",
+                  "isActive": true,
+                  "width": 700,
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Event Message"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "column_99a9a885-ab8f-481f-bd8f-83daf35aedaa",
+                  "label": "Related Node",
+                  "isActive": true,
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "NodeStatus",
+                        "vendor": null,
+                        "link": "NodeUrl",
+                        "value": "Node Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "network-device"
+                    }
+                  }
+                }
+              ],
+              "sorterConfiguration": {
+                "sortBy": "column_13cb17c3-ebed-453f-9c97-39ff59c7c311",
+                "descendantSorting": true
+              },
+              "hasVirtualScroll": true
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "0de7df52-d74d-4c42-9dc5-0ae78e8ee236",
+      "name": "Last 10 Application Events",
+      "private": false
+    },
+    {
+      "type": "table",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "All API Pollers",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": false,
+            "collapsed": true
+          }
+        },
+        "table": {
+          "providers": {
+            "dataSource": {
+              "providerId": "TableSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT a.Name as [Poller Name], DetailsUrl as ADetailsUrl, Status as APIPollerStatus\n, a.Node.Caption as [Node Name], a.Node.DetailsUrl as NDetailsUrl, a.Node.Status as NodeStatus\nFROM Orion.APIPoller.ApiPoller a\n",
+                "dataFields": [
+                  {
+                    "id": "Poller Name",
+                    "label": "Poller Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "ADetailsUrl",
+                    "label": "ADetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "APIPollerStatus",
+                    "label": "APIPollerStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Node Name",
+                    "label": "Node Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "NDetailsUrl",
+                    "label": "NDetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "NodeStatus",
+                    "label": "NodeStatus",
+                    "dataType": "System.Int32"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "properties": {
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT a.Name as [Poller Name], DetailsUrl as ADetailsUrl, Status as APIPollerStatus\n, a.Node.Caption as [Node Name], a.Node.DetailsUrl as NDetailsUrl, a.Node.Status as NodeStatus\nFROM Orion.APIPoller.ApiPoller a\n",
+                    "dataFields": [
+                      {
+                        "id": "Poller Name",
+                        "label": "Poller Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "ADetailsUrl",
+                        "label": "ADetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "APIPollerStatus",
+                        "label": "APIPollerStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Node Name",
+                        "label": "Node Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "NDetailsUrl",
+                        "label": "NDetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "NodeStatus",
+                        "label": "NodeStatus",
+                        "dataType": "System.Int32"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "columns": [
+                {
+                  "id": "column_25a405a9-9be8-45c5-aecc-3f864bcbabe1",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "APIPollerStatus",
+                        "vendor": null,
+                        "link": "ADetailsUrl",
+                        "value": "Poller Name"
+                      },
+                      "iconFormat": "status",
+                      "entityIcon": null
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Poller Name"
+                },
+                {
+                  "id": "column_6a7f7cca-a5b1-4932-9ad6-0fa0ab445062",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "NodeStatus",
+                        "vendor": null,
+                        "link": "NDetailsUrl",
+                        "value": "Node Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "server"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Node Name"
+                }
+              ],
+              "sorterConfiguration": {
+                "sortBy": "column_25a405a9-9be8-45c5-aecc-3f864bcbabe1",
+                "descendantSorting": ""
+              },
+              "hasVirtualScroll": true,
+              "searchConfiguration": {
+                "enabled": true
+              }
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "a3371b68-40bc-4635-88b8-f9e0c7e0b926",
+      "name": "All API Pollers",
+      "private": false
+    },
+    {
+      "type": "table",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "Top 10 Components by Statistic Data",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": false,
+            "collapsed": true
+          }
+        },
+        "table": {
+          "providers": {
+            "dataSource": {
+              "providerId": "TableSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT TOP 10 s.Component.Status as ComponentStatus, s.Component.DetailsUrl as CDetailsUrl, s.Component.Name as [Component Name]\n, s.Component.Application.Status as ApplicationStatus, s.Component.Application.DetailsUrl as ADetailsUrl, s.Component.Application.Name as [Application Name]\n, s.Component.Application.Node.Status as NodeStatus, s.Component.Application.Node.DetailsUrl as NDetailsUrl, s.Component.Application.Node.Caption as [Node Name]\n, ROUND(ComponentStatisticData,2) as [Statistic Data]\nFROM Orion.APM.CurrentStatistics s\nWHERE ComponentStatisticData is not NULL\nORDER BY ComponentStatisticData desc",
+                "dataFields": [
+                  {
+                    "id": "ComponentStatus",
+                    "label": "ComponentStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "CDetailsUrl",
+                    "label": "CDetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Component Name",
+                    "label": "Component Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "ApplicationStatus",
+                    "label": "ApplicationStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "ADetailsUrl",
+                    "label": "ADetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Application Name",
+                    "label": "Application Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "NodeStatus",
+                    "label": "NodeStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "NDetailsUrl",
+                    "label": "NDetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Node Name",
+                    "label": "Node Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Statistic Data",
+                    "label": "Statistic Data",
+                    "dataType": "System.Double"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "properties": {
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT TOP 10 s.Component.Status as ComponentStatus, s.Component.DetailsUrl as CDetailsUrl, s.Component.Name as [Component Name]\n, s.Component.Application.Status as ApplicationStatus, s.Component.Application.DetailsUrl as ADetailsUrl, s.Component.Application.Name as [Application Name]\n, s.Component.Application.Node.Status as NodeStatus, s.Component.Application.Node.DetailsUrl as NDetailsUrl, s.Component.Application.Node.Caption as [Node Name]\n, ROUND(ComponentStatisticData,2) as [Statistic Data]\nFROM Orion.APM.CurrentStatistics s\nWHERE ComponentStatisticData is not NULL\nORDER BY ComponentStatisticData desc",
+                    "dataFields": [
+                      {
+                        "id": "ComponentStatus",
+                        "label": "ComponentStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "CDetailsUrl",
+                        "label": "CDetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Component Name",
+                        "label": "Component Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "ApplicationStatus",
+                        "label": "ApplicationStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "ADetailsUrl",
+                        "label": "ADetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Application Name",
+                        "label": "Application Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "NodeStatus",
+                        "label": "NodeStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "NDetailsUrl",
+                        "label": "NDetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Node Name",
+                        "label": "Node Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Statistic Data",
+                        "label": "Statistic Data",
+                        "dataType": "System.Double"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "columns": [
+                {
+                  "id": "column_8dc4f3b6-e9a1-45c0-9e8d-41bfab63f0a3",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "ComponentStatus",
+                        "vendor": null,
+                        "link": "CDetailsUrl",
+                        "value": "Component Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "application-monitor"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Component Name"
+                },
+                {
+                  "id": "column_7a0c2374-67a8-4a03-bd41-aed4fcea7c50",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "ApplicationStatus",
+                        "vendor": null,
+                        "link": "ADetailsUrl",
+                        "value": "Application Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "application"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Application Name"
+                },
+                {
+                  "id": "column_17e671f0-bda3-4893-b0d8-c7e0a954ef08",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "NodeStatus",
+                        "vendor": null,
+                        "link": "NDetailsUrl",
+                        "value": "Node Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "server"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Node Name"
+                },
+                {
+                  "id": "column_e077c94a-68e7-47f8-8c71-0c219cf0f5ae",
+                  "label": "Statistic Data",
+                  "isActive": true,
+                  "formatter": {
+                    "componentType": "SimpleNumberFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Statistic Data"
+                      },
+                      "prefixIcon": "",
+                      "suffixText": ""
+                    }
+                  }
+                }
+              ],
+              "sorterConfiguration": {
+                "sortBy": "column_e077c94a-68e7-47f8-8c71-0c219cf0f5ae",
+                "descendantSorting": true
+              },
+              "hasVirtualScroll": true
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "a0806d23-03ed-4f60-9779-f52a41f8f2ca",
+      "name": "Top 10 Components by Statistic Data",
+      "private": false
+    },
+    {
+      "type": "table",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "Top 10 Components by CPU",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": false,
+            "collapsed": true
+          }
+        },
+        "table": {
+          "providers": {
+            "dataSource": {
+              "providerId": "TableSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT TOP 10 s.Component.Status as ComponentStatus, s.Component.DetailsUrl as CDetailsUrl, s.Component.Name as [Component Name]\n, s.Component.Application.Status as ApplicationStatus, s.Component.Application.DetailsUrl as ADetailsUrl, s.Component.Application.Name as [Application Name]\n, s.Component.Application.Node.Status as NodeStatus, s.Component.Application.Node.DetailsUrl as NDetailsUrl, s.Component.Application.Node.Caption as [Node Name]\n, ROUND(ComponentPercentCPU,2) as [CPU Usage]\nFROM Orion.APM.CurrentStatistics s\nWHERE ComponentPercentCPU >=0\nORDER BY ComponentPercentCPU desc",
+                "dataFields": [
+                  {
+                    "id": "ComponentStatus",
+                    "label": "ComponentStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "CDetailsUrl",
+                    "label": "CDetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Component Name",
+                    "label": "Component Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "ApplicationStatus",
+                    "label": "ApplicationStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "ADetailsUrl",
+                    "label": "ADetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Application Name",
+                    "label": "Application Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "NodeStatus",
+                    "label": "NodeStatus",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "NDetailsUrl",
+                    "label": "NDetailsUrl",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Node Name",
+                    "label": "Node Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "CPU Usage",
+                    "label": "CPU Usage",
+                    "dataType": "System.Double"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "properties": {
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT TOP 10 s.Component.Status as ComponentStatus, s.Component.DetailsUrl as CDetailsUrl, s.Component.Name as [Component Name]\n, s.Component.Application.Status as ApplicationStatus, s.Component.Application.DetailsUrl as ADetailsUrl, s.Component.Application.Name as [Application Name]\n, s.Component.Application.Node.Status as NodeStatus, s.Component.Application.Node.DetailsUrl as NDetailsUrl, s.Component.Application.Node.Caption as [Node Name]\n, ROUND(ComponentPercentCPU,2) as [CPU Usage]\nFROM Orion.APM.CurrentStatistics s\nWHERE ComponentPercentCPU >=0\nORDER BY ComponentPercentCPU desc",
+                    "dataFields": [
+                      {
+                        "id": "ComponentStatus",
+                        "label": "ComponentStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "CDetailsUrl",
+                        "label": "CDetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Component Name",
+                        "label": "Component Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "ApplicationStatus",
+                        "label": "ApplicationStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "ADetailsUrl",
+                        "label": "ADetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Application Name",
+                        "label": "Application Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "NodeStatus",
+                        "label": "NodeStatus",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "NDetailsUrl",
+                        "label": "NDetailsUrl",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Node Name",
+                        "label": "Node Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "CPU Usage",
+                        "label": "CPU Usage",
+                        "dataType": "System.Double"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "columns": [
+                {
+                  "id": "column_8dc4f3b6-e9a1-45c0-9e8d-41bfab63f0a3",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "ComponentStatus",
+                        "vendor": null,
+                        "link": "CDetailsUrl",
+                        "value": "Component Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "application-monitor"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Component Name"
+                },
+                {
+                  "id": "column_7a0c2374-67a8-4a03-bd41-aed4fcea7c50",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "ApplicationStatus",
+                        "vendor": null,
+                        "link": "ADetailsUrl",
+                        "value": "Application Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "application"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Application Name"
+                },
+                {
+                  "id": "column_17e671f0-bda3-4893-b0d8-c7e0a954ef08",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "NodeStatus",
+                        "vendor": null,
+                        "link": "NDetailsUrl",
+                        "value": "Node Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "server"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Node Name"
+                },
+                {
+                  "id": "column_083443ca-9359-4c53-aee2-a5bce96e6b73",
+                  "label": "CPU Usage",
+                  "isActive": true,
+                  "formatter": {
+                    "componentType": "SimpleNumberFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "CPU Usage"
+                      },
+                      "prefixIcon": "",
+                      "suffixText": "%"
+                    }
+                  }
+                }
+              ],
+              "sorterConfiguration": {
+                "sortBy": "column_083443ca-9359-4c53-aee2-a5bce96e6b73",
+                "descendantSorting": true
+              },
+              "hasVirtualScroll": true
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "0f2216be-dbdb-41a8-ab58-7d27b2505ac1",
+      "name": "Top 10 Components by CPU",
+      "private": false
+    }
+  ],
+  "remove": null
+}

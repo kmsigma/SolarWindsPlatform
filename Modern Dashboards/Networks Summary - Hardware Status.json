@@ -1,0 +1,303 @@
+{
+  "version": 1,
+  "dashboards": [
+    {
+      "widgets": [
+        {
+          "unique_key": "b9315c94-c235-482a-93e0-236647e8c43d",
+          "location": {
+            "x": 0,
+            "y": 0,
+            "cols": 12,
+            "rows": 5
+          },
+          "reference": false
+        }
+      ],
+      "parent": null,
+      "feature": null,
+      "unique_key": "688ff38a-41b1-48e7-ab55-3260e89bec92",
+      "name": "Networks Summary - Hardware Status",
+      "private": null
+    }
+  ],
+  "widgets": [
+    {
+      "type": "table",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "Hardware",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": true,
+            "collapsed": true
+          }
+        },
+        "table": {
+          "providers": {
+            "dataSource": {
+              "providerId": "TableSwqlDatasourceService",
+              "properties": {
+                "swql": "SELECT H.ParentObjectName as [Node Name], H.ParentObjectVendor as [Vendor], REPLACE(H.ParentObjectVendorIcon,'/NetPerfMon/images/Vendors/','') as [Vendor Icon], H.Manufacturer, H.Model, H.ServiceTag as [Service Tag], H.LastPollTime as [Last Poll Time], H.Status, H.CategoriesWithProblems as [Categories With Problems], H.DetailsUrl\nFROM Orion.HardwareHealth.HardwareInfo H\nWHERE H.NodeID in (SELECT NodeID FROM Orion.Nodes where Category=1)\nORDER BY H.ParentObjectName",
+                "dataFields": [
+                  {
+                    "id": "Node Name",
+                    "label": "Node Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Vendor",
+                    "label": "Vendor",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Vendor Icon",
+                    "label": "Vendor Icon",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Manufacturer",
+                    "label": "Manufacturer",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Model",
+                    "label": "Model",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Service Tag",
+                    "label": "Service Tag",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Last Poll Time",
+                    "label": "Last Poll Time",
+                    "dataType": "System.DateTime"
+                  },
+                  {
+                    "id": "Status",
+                    "label": "Status",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Categories With Problems",
+                    "label": "Categories With Problems",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "DetailsUrl",
+                    "label": "DetailsUrl",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "properties": {
+                "dataSource": {
+                  "properties": {
+                    "swql": "SELECT H.ParentObjectName as [Node Name], H.ParentObjectVendor as [Vendor], REPLACE(H.ParentObjectVendorIcon,'/NetPerfMon/images/Vendors/','') as [Vendor Icon], H.Manufacturer, H.Model, H.ServiceTag as [Service Tag], H.LastPollTime as [Last Poll Time], H.Status, H.CategoriesWithProblems as [Categories With Problems], H.DetailsUrl\nFROM Orion.HardwareHealth.HardwareInfo H\nWHERE H.NodeID in (SELECT NodeID FROM Orion.Nodes where Category=1)\nORDER BY H.ParentObjectName",
+                    "dataFields": [
+                      {
+                        "id": "Node Name",
+                        "label": "Node Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Vendor",
+                        "label": "Vendor",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Vendor Icon",
+                        "label": "Vendor Icon",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Manufacturer",
+                        "label": "Manufacturer",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Model",
+                        "label": "Model",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Service Tag",
+                        "label": "Service Tag",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Last Poll Time",
+                        "label": "Last Poll Time",
+                        "dataType": "System.DateTime"
+                      },
+                      {
+                        "id": "Status",
+                        "label": "Status",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Categories With Problems",
+                        "label": "Categories With Problems",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "DetailsUrl",
+                        "label": "DetailsUrl",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "columns": [
+                {
+                  "id": "column_b7d7b78d-693b-4f84-b941-e3ddaf9ad895",
+                  "label": "Hardware Status",
+                  "isActive": true,
+                  "formatter": {
+                    "componentType": "StatusFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Status"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "column_0ffa7853-f4be-461c-a2e8-307816b42a59",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "Status",
+                        "vendor": null,
+                        "link": "DetailsUrl",
+                        "value": "Node Name"
+                      },
+                      "iconFormat": "entityType",
+                      "entityIcon": "network-device"
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Node Name"
+                },
+                {
+                  "id": "column_549901fd-2db1-424c-a89e-60abb268c33e",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": null,
+                        "vendor": "Vendor Icon",
+                        "link": "DetailsUrl",
+                        "value": "Vendor"
+                      },
+                      "iconFormat": "vendor",
+                      "entityIcon": null
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Vendor"
+                },
+                {
+                  "id": "column_544bbbde-1793-40cb-934f-64bac8d93bfa",
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Manufacturer"
+                      }
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Manufacturer"
+                },
+                {
+                  "id": "column_ff08d4c3-8489-43f4-ae49-b45c993f8eed",
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Model"
+                      }
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Model"
+                },
+                {
+                  "id": "column_457ccdcf-d4d4-4823-a5ca-ee93b40a33cb",
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Service Tag"
+                      }
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Service Tag"
+                },
+                {
+                  "id": "column_6b1fd89f-b093-4942-a408-37a57921f46a",
+                  "formatter": {
+                    "componentType": "DatetimeFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Last Poll Time"
+                      },
+                      "option": "0",
+                      "replaceDate": false
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Last Poll Time"
+                },
+                {
+                  "id": "column_b79baedd-7ba5-4603-a6fa-fc546303a273",
+                  "label": "Categories With Problems",
+                  "isActive": true,
+                  "width": 700,
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Categories With Problems"
+                      }
+                    }
+                  }
+                }
+              ],
+              "sorterConfiguration": {
+                "sortBy": "column_0ffa7853-f4be-461c-a2e8-307816b42a59",
+                "descendantSorting": ""
+              },
+              "hasVirtualScroll": true,
+              "searchConfiguration": {
+                "enabled": true
+              }
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "b9315c94-c235-482a-93e0-236647e8c43d",
+      "name": "Hardware",
+      "private": false
+    }
+  ],
+  "remove": null
+}

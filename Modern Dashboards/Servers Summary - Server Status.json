@@ -1,0 +1,343 @@
+{
+  "version": 1,
+  "dashboards": [
+    {
+      "widgets": [
+        {
+          "unique_key": "9f43511d-1a15-442a-a272-f31ffc9c18fc",
+          "location": {
+            "x": 0,
+            "y": 0,
+            "cols": 12,
+            "rows": 5
+          },
+          "reference": false
+        }
+      ],
+      "parent": null,
+      "feature": null,
+      "unique_key": "17835495-7a1b-4987-a214-db28e724462a",
+      "name": "Servers Summary - Server Status",
+      "private": null
+    }
+  ],
+  "widgets": [
+    {
+      "type": "table",
+      "configuration": {
+        "header": {
+          "properties": {
+            "title": "Servers",
+            "subtitle": "",
+            "url": "",
+            "description": "",
+            "collapsible": true,
+            "collapsed": true
+          }
+        },
+        "table": {
+          "providers": {
+            "dataSource": {
+              "providerId": "TableSwqlDatasourceService",
+              "properties": {
+                "swql": "Select N.Caption as [Node Name], N.MachineType as [Machine Type], N.IP_Address as [IP Address], N.LastSystemUpTimePollUtc as [Last Successful Poll], N.VendorIcon as [Vendor Icon], N.Status, N.DetailsURL as [Details URL], N.Location, N.Contact, N.StatusDescription\nFrom Orion.Nodes N\nWhere N.Category=2",
+                "dataFields": [
+                  {
+                    "id": "Node Name",
+                    "label": "Node Name",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Machine Type",
+                    "label": "Machine Type",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "IP Address",
+                    "label": "IP Address",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Last Successful Poll",
+                    "label": "Last Successful Poll",
+                    "dataType": "System.DateTime"
+                  },
+                  {
+                    "id": "Vendor Icon",
+                    "label": "Vendor Icon",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Status",
+                    "label": "Status",
+                    "dataType": "System.Int32"
+                  },
+                  {
+                    "id": "Details URL",
+                    "label": "Details URL",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Location",
+                    "label": "Location",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "Contact",
+                    "label": "Contact",
+                    "dataType": "System.String"
+                  },
+                  {
+                    "id": "StatusDescription",
+                    "label": "StatusDescription",
+                    "dataType": "System.String"
+                  }
+                ],
+                "type": "hand-edit"
+              }
+            },
+            "adapter": {
+              "properties": {
+                "dataSource": {
+                  "properties": {
+                    "swql": "Select N.Caption as [Node Name], N.MachineType as [Machine Type], N.IP_Address as [IP Address], N.LastSystemUpTimePollUtc as [Last Successful Poll], N.VendorIcon as [Vendor Icon], N.Status, N.DetailsURL as [Details URL], N.Location, N.Contact, N.StatusDescription\nFrom Orion.Nodes N\nWhere N.Category=2",
+                    "dataFields": [
+                      {
+                        "id": "Node Name",
+                        "label": "Node Name",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Machine Type",
+                        "label": "Machine Type",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "IP Address",
+                        "label": "IP Address",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Last Successful Poll",
+                        "label": "Last Successful Poll",
+                        "dataType": "System.DateTime"
+                      },
+                      {
+                        "id": "Vendor Icon",
+                        "label": "Vendor Icon",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Status",
+                        "label": "Status",
+                        "dataType": "System.Int32"
+                      },
+                      {
+                        "id": "Details URL",
+                        "label": "Details URL",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Location",
+                        "label": "Location",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "Contact",
+                        "label": "Contact",
+                        "dataType": "System.String"
+                      },
+                      {
+                        "id": "StatusDescription",
+                        "label": "StatusDescription",
+                        "dataType": "System.String"
+                      }
+                    ],
+                    "type": "hand-edit"
+                  }
+                }
+              }
+            }
+          },
+          "properties": {
+            "configuration": {
+              "columns": [
+                {
+                  "id": "column_5a67a9d4-e350-425c-9e7b-c311639d0ad9",
+                  "label": "Node Status",
+                  "isActive": true,
+                  "formatter": {
+                    "componentType": "StatusFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Status"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "column_1c462f3a-06a5-4941-a5c5-657273d5c711",
+                  "label": "Node Name",
+                  "isActive": true,
+                  "width": 200,
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": "Status",
+                        "vendor": null,
+                        "link": "Details URL",
+                        "value": "Node Name"
+                      },
+                      "iconFormat": "entityTypeWithStatus",
+                      "entityIcon": "network-device"
+                    }
+                  }
+                },
+                {
+                  "id": "column_b9e7bd8a-9eec-4720-a5b6-668ba548db68",
+                  "formatter": {
+                    "componentType": "EntityLinkFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "status": null,
+                        "vendor": "Vendor Icon",
+                        "link": "Details URL",
+                        "value": "Machine Type"
+                      },
+                      "iconFormat": "vendor",
+                      "entityIcon": null
+                    }
+                  },
+                  "isActive": true,
+                  "label": "Machine Type"
+                },
+                {
+                  "id": "column_873a0d82-449b-4c67-a3b5-11c2edccf1cf",
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "IP Address"
+                      }
+                    }
+                  },
+                  "isActive": true,
+                  "label": "IP Address"
+                },
+                {
+                  "id": "column_c0dd66fb-1c9a-4ddb-a51a-704bf829b16e",
+                  "label": "Vendor Icon",
+                  "isActive": false,
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Vendor Icon"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "column_f8ba9f29-ea05-41d0-9088-5bb1be5f24a4",
+                  "label": "Status",
+                  "isActive": false,
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Status"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "column_190c00c6-2f19-4f53-9dc0-35b214b89eb7",
+                  "label": "Details URL",
+                  "isActive": false,
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Details URL"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "column_16f623f0-5637-4474-949f-25f73cf718ba",
+                  "label": "Last Successful Poll",
+                  "isActive": true,
+                  "formatter": {
+                    "componentType": "DatetimeFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Last Successful Poll"
+                      },
+                      "option": "0",
+                      "replaceDate": true
+                    }
+                  }
+                },
+                {
+                  "id": "column_7a98fdb6-dc13-4098-a88a-542a374b5618",
+                  "label": "Location",
+                  "isActive": true,
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Location"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "column_96d25f93-c903-4abb-8f21-df23a67a0b5d",
+                  "label": "Contact",
+                  "isActive": true,
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "Contact"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "column_ac282841-cea4-4db1-811c-dfaacee0599f",
+                  "label": "Status Description",
+                  "isActive": true,
+                  "width": 500,
+                  "formatter": {
+                    "componentType": "RawFormatterComponent",
+                    "properties": {
+                      "dataFieldIds": {
+                        "value": "StatusDescription"
+                      }
+                    }
+                  }
+                }
+              ],
+              "sorterConfiguration": {
+                "sortBy": "column_1c462f3a-06a5-4941-a5c5-657273d5c711",
+                "descendantSorting": ""
+              },
+              "hasVirtualScroll": true,
+              "searchConfiguration": {
+                "enabled": true
+              }
+            }
+          }
+        }
+      },
+      "subtitle": "",
+      "description": "",
+      "unique_key": "9f43511d-1a15-442a-a272-f31ffc9c18fc",
+      "name": "Servers",
+      "private": false
+    }
+  ],
+  "remove": null
+}
