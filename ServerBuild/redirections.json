@@ -1,0 +1,91 @@
+[
+    {
+        "ServerType": [
+            "Primary Polling Engine",
+            "Additional Web Site"
+        ],
+        "Source": "C:\\inetpub",
+        "TargetDiskLabel": "Web",
+        "Order": 0
+    },
+    {
+        "ServerType": [
+            "Primary Polling Engine",
+            "Additional Polling Engine",
+            "Additional Web Site"
+        ],
+        "Source": "C:\\ProgramData\\SolarWinds",
+        "TargetDiskLabel": "Programs",
+        "Order": 1
+    },
+    {
+        "ServerType": [
+            "Primary Polling Engine",
+            "Additional Polling Engine",
+            "Additional Web Site"
+        ],
+        "Source": "C:\\ProgramData\\SolarWindsAgentInstall",
+        "TargetDiskLabel": "Programs",
+        "Order": 2
+    },
+    {
+        "ServerType": [
+            "Primary Polling Engine",
+            "Additional Polling Engine",
+            "Additional Web Site"
+        ],
+        "Source": "C:\\ProgramData\\SolarWinds\\Logs",
+        "TargetDiskLabel": "Logs",
+        "Order": 3
+    },
+    {
+        "ServerType": [
+            "Primary Polling Engine",
+            "Additional Polling Engine",
+            "Additional Web Site"
+        ],
+        "Source": "C:\\Program Files\\SolarWinds",
+        "TargetDiskLabel": "Programs",
+        "Order": 1
+    },
+    {
+        "ServerType": [
+            "Primary Polling Engine",
+            "Additional Polling Engine",
+            "Additional Web Site"
+        ],
+        "Source": "C:\\Program Files\\SolarWinds\\Orion\\Web",
+        "TargetDiskLabel": "Web",
+        "Order": 1
+    },
+    {
+        "ServerType": [
+            "Primary Polling Engine",
+            "Additional Polling Engine",
+            "Additional Web Site"
+        ],
+        "Source": "C:\\Program Files\\Common Files\\SolarWinds",
+        "TargetDiskLabel": "Programs",
+        "Order": 2
+    },
+    {
+        "ServerType": [
+            "Primary Polling Engine",
+            "Additional Polling Engine",
+            "Additional Web Site"
+        ],
+        "Source": "C:\\Program Files (x86)\\SolarWinds",
+        "TargetDiskLabel": "Programs",
+        "Order": 1
+    },
+    {
+        "ServerType": [
+            "Primary Polling Engine",
+            "Additional Polling Engine",
+            "Additional Web Site"
+        ],
+        "Source": "C:\\Program Files (x86)\\Common Files\\SolarWinds",
+        "TargetDiskLabel": "Programs",
+        "Order": 2
+    }
+]
