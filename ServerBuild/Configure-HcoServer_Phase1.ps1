@@ -2,9 +2,9 @@
 Updated for Hybrid Cloud Observability installer and Windows Server 2022
 
 #>
-$ProgramsDrive = "E:\"
+# $ProgramsDrive = "E:\"  #<-- Unused
 $WebDrive      = "F:\"
-$LogDrive      = "G:\"
+# $LogDrive      = "G:\" #<-- Unused
 
 # Enable Disk IO performance counters in task manager
 Start-Process -FilePath "C:\Windows\System32\diskperf.exe" -ArgumentList "-Y" -Wait
