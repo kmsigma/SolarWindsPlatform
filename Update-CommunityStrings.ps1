@@ -22,10 +22,9 @@ $OldRwCommunity = 'Old Read-Write Community String Here'
 $NewRoCommunity = 'New Read-Only Community String Here'
 $NewRwCommunity = 'New Read-Write Community String Here'
 
-# Query to get all the nodes with the legacy Read-Only Community String
-$SwqlRoQuery = @"
+# Query to get all the nodes with the legacy Read-Only Community String from NPM enties
+$SwqlRoQueryNpm = @"
 SELECT [Nodes].NodeID
-     , [Nodes].ObjectSubType
      , [Nodes].IPAddress
      , [Nodes].Caption
      , [Nodes].Community AS [ROCommunity]
@@ -37,10 +36,9 @@ WHERE [Nodes].ObjectSubType = 'SNMP'
 ORDER BY [Nodes].Caption
 "@
 
-# Query to get all the nodes with the legacy Read-Write Community String
-$SwqlRwQuery = @"
+# Query to get all the nodes with the legacy Read-Write Community String from NPM entities
+$SwqlRwQueryNpm = @"
 SELECT [Nodes].NodeID
-     , [Nodes].ObjectSubType
      , [Nodes].IPAddress
      , [Nodes].Caption
      , [Nodes].Community AS [ROCommunity]
@@ -52,18 +50,64 @@ WHERE [Nodes].ObjectSubType = 'SNMP'
 ORDER BY [Nodes].Caption
 "@
 
-# Retrieve data from the SolarWinds Information Service for Read-Only and Read-Write Community Strings
-$NodesToUpdateRoCommunity = Get-SwisData -SwisConnection $SwisConnection -Query $SwqlRoQuery
-$NodesToUpdateRwCommunity = Get-SwisData -SwisConnection $SwisConnection -Query $SwqlRwQuery
+# Query to get all the nodes with the legacy Read-Only Community String from NCM enties
+$SwqlRoQueryNcm = @"
+SELECT [NcmNodes].CoreNodeID AS [NodeID]
+     , [NcmNodes].NodeCaption AS [Caption]
+     , [NcmNodes].AgentIP AS IPAddress
+     , [NcmNodes].Community AS [ROCommunity]
+     , [NcmNodes].CommunityReadWrite AS [RWCommunity]
+     , [NcmNodes].Uri
+FROM Cirrus.Nodes AS [NcmNodes]
+WHERE ROCommunity = '$( $OldRoCommunity )'
+ORDER BY [Caption]
+"@
 
-ForEach ( $NodeRo in $NodesToUpdateRoCommunity ) {
-    Write-Host "Updating RO Community String for $( $NodeRo.Caption) from '$( $NodeRo.ROCommunity )' to '$NewRoCommunity'"
+# Query to get all the nodes with the legacy Read-Write Community String from NCM entities
+$SwqlRwQueryNcm = @"
+SELECT [NcmNodes].CoreNodeID AS [NodeID]
+     , [NcmNodes].NodeCaption AS [Caption]
+     , [NcmNodes].AgentIP AS IPAddress
+     , [NcmNodes].Community AS [ROCommunity]
+     , [NcmNodes].CommunityReadWrite AS [RWCommunity]
+     , [NcmNodes].Uri
+FROM Cirrus.Nodes AS [NcmNodes]
+WHERE RWCommunity = '$( $OldRwCommunity )'
+ORDER BY [Caption]
+"@
+
+# Retrieve data from the SolarWinds Information Service for Read-Only and Read-Write Community Strings (NPM-based)
+$NodesToUpdateRoCommunityNpm = Get-SwisData -SwisConnection $SwisConnection -Query $SwqlRoQueryNpm
+$NodesToUpdateRwCommunityNpm = Get-SwisData -SwisConnection $SwisConnection -Query $SwqlRwQueryNpm
+
+# Retrieve data from the SolarWinds Information Service for Read-Only and Read-Write Community Strings (NCM-based)
+$NodesToUpdateRoCommunityNcm = Get-SwisData -SwisConnection $SwisConnection -Query $SwqlRoQueryNcm
+$NodesToUpdateRwCommunityNcm = Get-SwisData -SwisConnection $SwisConnection -Query $SwqlRwQueryNcm
+
+#region Update NPM entities
+ForEach ( $NodeRoNpm in $NodesToUpdateRoCommunityNpm ) {
+    Write-Host "NPM: Updating RO Community String for $( $NodeRoNpm.Caption) from '$( $NodeRoNpm.ROCommunity )' to '$NewRoCommunity'"
     # Uncomment the below line to actually do the work
-    # Set-SwisObject -SwisConnection $SwisConnection -Uri $NodeRo.Uri -Properties @{ Community = $NewRoCommunity }
+    # Set-SwisObject -SwisConnection $SwisConnection -Uri $NodeRoNpm.Uri -Properties @{ Community = $NewRoCommunity }
 }
 
-ForEach ( $NodeRw in $NodesToUpdateRwCommunity ) {
-    Write-Host "Updating RO Community String for $( $NodeRw.Caption) from '$( $NodeRw.RWCommunity )' to '$NewRwCommunity'"
+ForEach ( $NodeRwNpm in $NodesToUpdateRwCommunityNpm ) {
+    Write-Host "NPM: Updating RO Community String for $( $NodeRwNpm.Caption) from '$( $NodeRwNpm.RWCommunity )' to '$NewRwCommunity'"
     # Uncomment the below line to actually do the work
-    # Set-SwisObject -SwisConnection $SwisConnection -Uri $NodeRw.Uri -Properties @{ RWCommunity = $NewRwCommunity }
+    # Set-SwisObject -SwisConnection $SwisConnection -Uri $NodeRwNpm.Uri -Properties @{ RWCommunity = $NewRwCommunity }
 }
+#endregion Update NPM entities
+
+#region Update NCM entities
+ForEach ( $NodeRoNcm in $NodesToUpdateRoCommunityNcm ) {
+    Write-Host "NCM: Updating RO Community String for $( $NodeRoNcm.Caption) from '$( $NodeRoNcm.ROCommunity )' to '$NewRoCommunity'"
+    # Uncomment the below line to actually do the work
+    # Set-SwisObject -SwisConnection $SwisConnection -Uri $NodeRoNcm.Uri -Properties @{ Community = $NewRoCommunity }
+}
+
+ForEach ( $NodeRwNcm in $NodesToUpdateRwCommunityNcm ) {
+    Write-Host "NCM: Updating RO Community String for $( $NodeRwNcm.Caption) from '$( $NodeRwNcm.RWCommunity )' to '$NewRwCommunity'"
+    # Uncomment the below line to actually do the work
+    # Set-SwisObject -SwisConnection $SwisConnection -Uri $NodeRwNcm.Uri -Properties @{ CommunityReadWrite = $NewRwCommunity }
+}
+#region Update NCM entities
